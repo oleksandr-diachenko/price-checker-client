@@ -1,6 +1,9 @@
-<div *ngFor="let article of articles">
-
-  <p>
-    {{article}}
-  </p>
-</div>
+<table mdbTable>
+  <tbody>
+  <tr mdbTableCol *ngFor="let row of articles">
+    <td *ngFor="let cell of row">
+      <span> {{cell}}</span>
+    </td>
+  </tr>
+  </tbody>
+</table>
