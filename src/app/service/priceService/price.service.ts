@@ -9,6 +9,6 @@ export class PriceService {
   constructor(private httpClient: HttpClient) { }
 
   public getPriceTable(){
-      return this.httpClient.get(`http://localhost:8080/price-table/1/2`);
+      return this.httpClient.get(`/api/price-table/1/2`);
     }
 }
