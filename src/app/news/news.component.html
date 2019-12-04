@@ -1,8 +1,8 @@
-<table mdbTable>
+<table mdbTable striped="true" bordered="true" small="true" responsive="true">
   <tbody>
   <tr mdbTableCol *ngFor="let row of articles">
     <td *ngFor="let cell of row">
-      <span> {{cell}}</span>
+      {{cell}}
     </td>
   </tr>
   </tbody>
