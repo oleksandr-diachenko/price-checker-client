@@ -3,13 +3,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { NewsComponent } from './news/news.component';
+import { PriceTableComponent } from './priceTable/priceTable.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NewsComponent
+    PriceTableComponent
   ],
   imports: [
     BrowserModule,

@@ -3,18 +3,18 @@ import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-news',
-  templateUrl: './news.component.html',
-  styleUrls: ['./news.component.css']
+  templateUrl: './priceTable.component.html',
+  styleUrls: ['./priceTable.component.css']
 })
-export class NewsComponent implements OnInit {
+export class PriceTableComponent implements OnInit {
 
-  articles;
+  priceTable;
 
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
     this.apiService.getNews().subscribe((data)=>{
-      this.articles = data;
+      this.priceTable = data;
     });
   }
 }

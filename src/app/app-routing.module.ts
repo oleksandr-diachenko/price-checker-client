@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { NewsComponent } from './news/news.component';
+import { PriceTableComponent } from './priceTable/priceTable.component';
 
 
-const routes: Routes = [{path:'news', component: NewsComponent}];
+const routes: Routes = [{path:'priceTable', component: PriceTableComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
