@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 
 @Component({
-  selector: 'app-news',
+  selector: 'app-priceTable',
   templateUrl: './priceTable.component.html',
   styleUrls: ['./priceTable.component.css']
 })
