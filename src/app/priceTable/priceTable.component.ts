@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
+import { PriceService } from '../service/priceService/price.service';
 
 @Component({
   selector: 'app-priceTable',
@@ -10,10 +10,10 @@ export class PriceTableComponent implements OnInit {
 
   priceTable;
 
-  constructor(private apiService: ApiService) { }
+  constructor(private priceService: PriceService) { }
 
   ngOnInit() {
-    this.apiService.getNews().subscribe((data)=>{
+    this.priceService.getPriceTable().subscribe((data)=>{
       this.priceTable = data;
     });
   }

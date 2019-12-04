@@ -4,11 +4,11 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class PriceService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getNews(){
+  public getPriceTable(){
       return this.httpClient.get(`http://localhost:8080/price-table/1/2`);
     }
 }
