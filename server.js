@@ -1,9 +1,14 @@
-const path = require("path");
-const express = require("express");
+const express = require('express');
+const path = require('path');
 const app = express();
-app.use(express.static(__dirname + '/price-checker-client'));
-app.get('/*', function(req,res){
-res.sendFile(path.join(__dirname + '/dist/price-checker-client/', 'index.html'))
+
+// Serve static files....
+app.use(express.static(__dirname + '/dist/magazine-price-checker'));
+
+// Send all requests to index.html
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname + '/dist/magazine-price-checker/index.html'));
 });
-// Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
+
+// default Heroku PORT
+app.listen(process.env.PORT || 3000);
