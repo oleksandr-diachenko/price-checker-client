@@ -1,14 +1,14 @@
-const express = require('express');
-const path = require('path');
-const app = express();
-
-// Serve static files....
-app.use(express.static(__dirname + '/dist'));
-
-// Send all requests to index.html
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/dist/price-checker-client/index.html'));
+var express = require('express');
+var httpProxy = require('http-proxy');
+var apiForwardingUrl = 'https://price-checker-web.herokuapp.com/';
+var server = express();
+server.set('port', 3000);
+server.use(express.static(__dirname + '/app'));
+var apiProxy = httpProxy.createProxyServer();
+// Grab all requests to the server with "/space/".
+server.all("/api/*", function(req, res) {
+    console.log("Request made to /space/");
 });
-
-// default Heroku PORT
-app.listen(process.env.PORT || 3000);
+server.listen(server.get('port'), function() {
+    console.log('Express server listening on port ' + server.get('port'));
+});
