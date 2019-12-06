@@ -7,7 +7,7 @@ app.use(express.static(__dirname + '/dist'));
 
 // Send all requests to index.html
 app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/dist/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/price-checker-client/index.html'));
 });
 
 // default Heroku PORT
