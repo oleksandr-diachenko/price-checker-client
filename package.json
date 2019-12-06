@@ -6,7 +6,7 @@
     "start": "node server.js",
     "start:dev": "ng serve --proxy-config=proxy/dev-proxy.conf.js",
     "start:prod": "ng serve --proxy-config=proxy/prod-proxy.conf.js",
-    "postinstall": "ng build --aot -prod",
+    "postinstall": "ng build --aot --prod",
     "heroku-postbuild": "ng build --prod",
     "build": "ng build",
     "test": "ng test",
