@@ -7,7 +7,6 @@
     "start:dev": "ng serve --proxy-config=proxy/dev-proxy.conf.js",
     "start:prod": "ng serve --proxy-config=proxy/prod-proxy.conf.js",
     "postinstall": "ng build --aot --prod",
-    "heroku-postbuild": "ng build --prod",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -60,7 +59,7 @@
     "typescript": "~3.5.3"
   },
   "engines": {
-    "node": "12.3.1",
-    "npm": "6.13.2"
+    "node": "~12.3.1",
+    "npm": "~6.13.2"
   }
 }
