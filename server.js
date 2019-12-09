@@ -14,6 +14,6 @@ const renderIndex = (req, res) => {
 }
 app.get('/*', renderIndex);
 
-app.listen(3000, () => {
+app.listen((process.env.PORT || 3000), () => {
   console.log('Listening on: https://price-checker-web.herokuapp.com/');
 });
