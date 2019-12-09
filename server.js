@@ -1,5 +1,6 @@
 const express = require('express');
 const proxy = require('http-proxy-middleware');
+const path = require('path');
 
 const app = express();
 app.use(express.static('price-checker-client'));
