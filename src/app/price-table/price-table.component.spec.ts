@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PriceTableComponent } from './priceTable.component';
+import { PriceTableComponent } from './price-table.component';
 
 describe('PriceTableComponent', () => {
   let component: PriceTableComponent;

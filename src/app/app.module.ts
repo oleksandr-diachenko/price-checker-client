@@ -3,13 +3,15 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { PriceTableComponent } from './priceTable/priceTable.component';
+import { PriceTableComponent } from './price-table/price-table.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { PriceCheckerInputComponent } from './price-checker-input/price-checker-input.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PriceTableComponent
+    PriceTableComponent,
+    PriceCheckerInputComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PriceTableComponent } from './priceTable/priceTable.component';
+import { PriceTableComponent } from './price-table/price-table.component';
 
 
-const routes: Routes = [{path:'priceTable', component: PriceTableComponent}];
+const routes: Routes = [{path:'price-table', component: PriceTableComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
