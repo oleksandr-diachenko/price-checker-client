@@ -6,8 +6,8 @@ const app = express();
 app.use(express.static('dist/price-checker-client'));
 
 // Add middleware for http proxying
-const apiProxy = proxy('/api', { target: 'https://price-checker-web.herokuapp.com/' });
-app.use('/api', apiProxy);
+const apiProxy = proxy('/api/*', { target: 'https://price-checker-web.herokuapp.com/' });
+app.use('/api/*', apiProxy);
 
 // Render your site
 const renderIndex = (req, res) => {
