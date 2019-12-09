@@ -1,20 +1,19 @@
-var express  = require('express');
-var app      = express();
-var httpProxy = require('http-proxy');
-var apiProxy = httpProxy.createProxyServer();
-var backend = 'https://price-checker-web.herokuapp.com/',
-    frontend = 'https://magazine-price-checker.herokuapp.com/';
+const express = require('express');
+const proxy = require('http-proxy-middleware');
 
-app.all("/api/*", function(req, res) {
-  apiProxy.web(req, res, {target: backend});
-});
+const app = express();
+app.use(express.static('price-checker-client'));
 
-app.all("/*", function(req, res) {
-    apiProxy.web(req, res, {target: frontend});
-});
+// Add middleware for http proxying
+const apiProxy = proxy('/api', { target: 'https://price-checker-web.herokuapp.com/' });
+app.use('/api', apiProxy);
 
-var server = require('http').createServer(app);
-server.on('upgrade', function (req, socket, head) {
-  apiProxy.ws(req, socket, head, {target: frontend});
+// Render your site
+const renderIndex = (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'price-checker-client/index.html'));
+}
+app.get('/*', renderIndex);
+
+app.listen(3000, () => {
+  console.log('Listening on: https://price-checker-web.herokuapp.com/');
 });
-server.listen(3000);
