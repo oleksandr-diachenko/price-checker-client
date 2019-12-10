@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PriceTableComponent } from './component/price-table/price-table.component';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { PriceCheckerFormComponent } from './component/price-checker-form/price-checker-form.component';
 import { FormsModule }   from '@angular/forms';
 
@@ -18,7 +17,6 @@ import { FormsModule }   from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    MDBBootstrapModule.forRoot(),
     FormsModule
   ],
   providers: [],
