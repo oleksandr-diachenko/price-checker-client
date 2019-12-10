@@ -17,9 +17,12 @@ export class PriceCheckerInputComponent implements OnInit {
 
   fileProgress(fileInput: any) {
       this.fileData = <File>fileInput.target.files[0];
-      const formData = new FormData();
-      formData.append('file', this.fileData);
-      this.http.post('/api/file-upload', formData)
+  }
+
+  onclick() {
+    const formData = new FormData();
+    formData.append('file', this.fileData);
+      this.http.post('/api/price-table/1/2', formData)
         .subscribe(res => {
           console.log(res);
         })
