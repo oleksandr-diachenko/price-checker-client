@@ -10,8 +10,8 @@ import { PriceService } from '../service/priceService/price.service';
 })
 export class PriceCheckerInputComponent implements OnInit {
 
-    fileBefore: File = null;
-    fileAfter: File = null;
+    fileBefore: File;
+    fileAfter: File;
     isDownloadDisable: boolean = true;
 
     constructor(private http: HttpClient, private priceService: PriceService) { }
@@ -30,14 +30,13 @@ export class PriceCheckerInputComponent implements OnInit {
         this.priceService.getPriceTable(formData).subscribe((data) => {
             var b: any = new Blob([data], { type: 'application/binary' });
             b.lastModifiedDate = new Date();
-            b.name = 'test.xlsx';
+            b.name = this.fileBefore.name;
             this.fileAfter = <File>b;
             this.isDownloadDisable = false;
         });
     }
 
     download() {
-        console.log(this.fileAfter);
-        saveAs(this.fileAfter, 'test1.xlsx')
+        saveAs(this.fileAfter, new Date().valueOf() + '_' + this.fileBefore.name)
     }
 }
