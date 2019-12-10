@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-price-checker-input',
@@ -8,7 +9,8 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 })
 export class PriceCheckerInputComponent implements OnInit {
 
-  fileData: File = null;
+  fileBefore: File = null;
+  fileAfter: File = null;
 
   constructor(private http: HttpClient) { }
 
@@ -16,15 +18,26 @@ export class PriceCheckerInputComponent implements OnInit {
   }
 
   fileProgress(fileInput: any) {
-      this.fileData = <File>fileInput.target.files[0];
+      this.fileBefore = <File>fileInput.target.files[0];
   }
 
-  onclick() {
+  checkPrice() {
     const formData = new FormData();
-    formData.append('file', this.fileData);
-      this.http.post('/api/price-table/1/2', formData)
-        .subscribe(res => {
-          console.log(res);
+      formData.append('file', this.fileBefore);
+      this.http.post('/api/price-table/1/2',
+        formData,
+        {responseType: 'arraybuffer'})
+        .subscribe(response => {
+          console.log(response);
+          var b: any = new Blob([response], { type: 'application/binary' });
+          b.lastModifiedDate = new Date();
+          b.name = 'test.xlsx';
+          this.fileAfter = <File>b;
         })
+  }
+
+  download() {
+      console.log(this.fileAfter);
+      saveAs(this.fileAfter, 'test1.xlsx')
   }
 }
