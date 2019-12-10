@@ -39,14 +39,15 @@ export class PriceCheckerFormComponent implements OnInit {
         const formData = new FormData();
         console.log(this.inputForm.file)
         formData.append('file', this.inputForm.file);
-        this.priceService.getPriceTable(formData).subscribe((data) => {
-            var b: any = new Blob([data], { type: 'application/binary' });
-            console.log(b)
-            b.lastModifiedDate = new Date();
-            b.name = this.getCurrentFileName(this.inputForm.file.name);
-            this.inputForm.file = <File>b;
-            console.log(this.inputForm.file)
-        });
+        this.priceService.getPriceTable(formData, this.inputForm.urlColumn, this.inputForm.insertColumn)
+            .subscribe((data) => {
+                var b: any = new Blob([data], { type: 'application/binary' });
+                console.log(b)
+                b.lastModifiedDate = new Date();
+                b.name = this.getCurrentFileName(this.inputForm.file.name);
+                this.inputForm.file = <File>b;
+                console.log(this.inputForm.file)
+            });
     }
 
     getCurrentFileName(fileName: string) {

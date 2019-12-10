@@ -8,8 +8,8 @@ export class PriceService {
 
     constructor(private httpClient: HttpClient) { }
 
-    public getPriceTable(formData: FormData) {
-        return this.httpClient.post('/api/price-table/1/2',
+    public getPriceTable(formData: FormData, urlColumn: number, insertColumn: number) {
+        return this.httpClient.post('/api/price-table/' + urlColumn + '/' + insertColumn,
                 formData,
                 {responseType: 'arraybuffer'}
             );
