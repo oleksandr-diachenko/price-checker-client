@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PriceTableComponent } from './price-table/price-table.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { PriceCheckerInputComponent } from './price-checker-input/price-checker-input.component';
+import { FormsModule }   from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PriceCheckerInputComponent } from './price-checker-input/price-checker-
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

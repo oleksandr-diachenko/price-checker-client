@@ -1,5 +1,13 @@
-<input type="file" name="inputFile" id="inputFile" (change)="fileProgress($event)"/>
-<input type="number" name="urlColumnNumber" id="urlColumnNumber"/>
-<input type="number" name="insertColumnNumber" id="insertColumnNumber"/>
-<button type="submit" (click)="checkPrice()" name="checkPrice" id="checkPrice">Check price</button>
-<button type="submit" [disabled]="isDownloadDisable"(click)="download()" name="downloadFile" id="downloadFile">Download</button>
+<div class="form-group">
+  <label for="inputFile">Choose file</label>
+  <input type="file" class="form-control" ngModel name="inputFile" id="inputFile" (change)="fileProgress($event)"/>
+  <label for="urlColumnNumber">Enter url column number</label>
+  <input type="number" class="form-control" ngModel name="urlColumnNumber" id="urlColumnNumber"/>
+  <label for="insertColumnNumber">Enter column number to insert</label>
+  <input type="number" class="form-control" ngModel name="insertColumnNumber" id="insertColumnNumber"/>
+  <button type="submit" class="form-control" (click)="checkPrice()" name="checkPrice" id="checkPrice">Check price
+  </button>
+  <button type="submit" class="form-control" [disabled]="isDownloadDisable" (click)="download()" name="downloadFile"
+          id="downloadFile">Download
+  </button>
+</div>
