@@ -12,6 +12,7 @@ export class PriceCheckerInputComponent implements OnInit {
 
     fileBefore: File = null;
     fileAfter: File = null;
+    isDownloadDisable: boolean = true;
 
     constructor(private http: HttpClient, private priceService: PriceService) { }
 
@@ -25,12 +26,13 @@ export class PriceCheckerInputComponent implements OnInit {
     checkPrice() {
         const formData = new FormData();
         formData.append('file', this.fileBefore);
+        this.isDownloadDisable = true;
         this.priceService.getPriceTable(formData).subscribe((data) => {
-            console.log(data);
             var b: any = new Blob([data], { type: 'application/binary' });
             b.lastModifiedDate = new Date();
             b.name = 'test.xlsx';
             this.fileAfter = <File>b;
+            this.isDownloadDisable = false;
         });
     }
 

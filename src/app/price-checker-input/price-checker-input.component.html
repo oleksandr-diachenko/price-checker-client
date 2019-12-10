@@ -2,4 +2,4 @@
 <input type="number" name="urlColumnNumber" id="urlColumnNumber"/>
 <input type="number" name="insertColumnNumber" id="insertColumnNumber"/>
 <button type="submit" (click)="checkPrice()" name="checkPrice" id="checkPrice">Check price</button>
-<button type="submit" (click)="download()" name="downloadFile" id="downloadFile">Download</button>
+<button type="submit" [disabled]="isDownloadDisable"(click)="download()" name="downloadFile" id="downloadFile">Download</button>
