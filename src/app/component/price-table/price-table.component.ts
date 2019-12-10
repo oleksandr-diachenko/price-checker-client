@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PriceService } from '../service/priceService/price.service';
+import { PriceService } from 'app/service/price-service/price.service';
 
 @Component({
     selector: 'app-price-table',

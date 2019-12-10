@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PriceTableComponent } from './price-table/price-table.component';
+import { PriceTableComponent } from './component/price-table/price-table.component';
 
 
 const routes: Routes = [{path:'price-table', component: PriceTableComponent}];

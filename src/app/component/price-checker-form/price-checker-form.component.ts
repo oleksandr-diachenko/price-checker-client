@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { saveAs } from 'file-saver';
-import { PriceService } from '../service/priceService/price.service';
+import { PriceService } from 'app/service/price-service/price.service';
 
 @Component({
-    selector: 'app-price-checker-input',
-    templateUrl: './price-checker-input.component.html',
-    styleUrls: ['./price-checker-input.component.scss']
+    selector: 'app-price-checker-form',
+    templateUrl: './price-checker-form.component.html',
+    styleUrls: ['./price-checker-form.component.scss']
 })
-export class PriceCheckerInputComponent implements OnInit {
+export class PriceCheckerFormComponent implements OnInit {
 
     fileBefore: File;
     fileAfter: File;
