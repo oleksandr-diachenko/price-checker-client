@@ -17,7 +17,7 @@ export class CompleteComponent {
     }
 
     getCurrentFileName(fileName: string) {
-        return new Date().valueOf() + '_' + this.file.name;
+        return new Date().valueOf() + '_' + fileName;
     }
 
     download() {

@@ -23,11 +23,9 @@ export class PriceCheckerFormComponent {
     }
 
     changeFileInputLabel() {
-        var fileName = 'Choose file';
-        if(this.inputForm.file != null) {
-            fileName = this.inputForm.file.name;
-        }
-        document.getElementById('fileInputLabel').innerHTML = fileName;
+        document.getElementById('fileInputLabel').innerHTML = this.inputForm.file
+                                                              ? this.inputForm.file.name
+                                                              : 'Choose file';
     }
 
     checkPrice() {
@@ -46,7 +44,7 @@ export class PriceCheckerFormComponent {
     }
 
     getCurrentFileName(fileName: string) {
-        return new Date().valueOf() + '_' + this.inputForm.file.name;
+        return new Date().valueOf() + '_' + fileName;
     }
 
     receiveChecked($event) {
