@@ -28,11 +28,20 @@ export class PriceCheckerFormComponent implements OnInit {
 
     fileProgress(fileInput: any) {
         this.inputForm.file = <File>fileInput.target.files[0];
+        this.changeFileInputLabel();
         if(this.inputForm.file != null) {
             this.filePicked = true;
         } else {
             this.filePicked = false;
         }
+    }
+
+    changeFileInputLabel() {
+        var fileName = 'Choose file';
+        if(this.inputForm.file != null) {
+            fileName = this.inputForm.file.name;
+        }
+        document.getElementById('fileInputLabel').innerHTML = fileName;
     }
 
     checkPrice() {
