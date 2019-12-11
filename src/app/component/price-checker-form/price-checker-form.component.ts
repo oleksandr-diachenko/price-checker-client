@@ -59,7 +59,7 @@ export class PriceCheckerFormComponent {
         return new Date().valueOf() + '_' + this.inputForm.file.name;
     }
 
-   download() {
-       saveAs(this.inputForm.file, this.getCurrentFileName(this.inputForm.file.name))
-   }
+    receiveChecked($event) {
+        this.checked = $event
+    }
 }

@@ -38,9 +38,5 @@
 
     </form>
   </div>
-
-  <div [hidden]="!checked">
-    <button class="btn btn-primary" (click)="checked=false">New check</button>
-    <button class="btn btn-primary" (click)="download()">Download</button>
-  </div>
+  <app-complete [checked]="checked" (checkedEvent)="receiveChecked($event)" [inputForm]="inputForm"></app-complete>
 </div>
