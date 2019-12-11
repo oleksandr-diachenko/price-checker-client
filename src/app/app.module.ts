@@ -9,6 +9,8 @@ import { FormsModule }   from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoaderComponent } from './component/loader/loader.component'
 import { LoaderService } from './service/loader-service/loader.service';
+import { HeaderComponent } from './component/header/header.component';
+import { FooterComponent } from './component/footer/footer.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { LoaderService } from './service/loader-service/loader.service';
     AppComponent,
     PriceTableComponent,
     PriceCheckerFormComponent,
-    LoaderComponent
+    LoaderComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
