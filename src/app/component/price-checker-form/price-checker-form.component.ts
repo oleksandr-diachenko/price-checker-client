@@ -13,15 +13,14 @@ export class PriceCheckerFormComponent implements OnInit {
 
     inputForm: InputForm = new InputForm(null, 1, 1);
 
-    submitted: boolean = false;
+    hideMain: boolean = false;
+    hideSecond: boolean = true;
 
     filePicked: boolean = false;
 
-    constructor(private priceService: PriceService) { }
+    showSpinner: boolean = false;
 
-    onSubmit() {
-        this.submitted = true;
-    }
+    constructor(private priceService: PriceService) { }
 
     ngOnInit() {
     }
@@ -45,6 +44,7 @@ export class PriceCheckerFormComponent implements OnInit {
     }
 
     checkPrice() {
+        this.showSpinner = true;
         const formData = new FormData();
         console.log(this.inputForm.file)
         formData.append('file', this.inputForm.file);
@@ -55,7 +55,9 @@ export class PriceCheckerFormComponent implements OnInit {
                 b.lastModifiedDate = new Date();
                 b.name = this.getCurrentFileName(this.inputForm.file.name);
                 this.inputForm.file = <File>b;
-                console.log(this.inputForm.file)
+                this.showSpinner = false;
+                this.hideMain = true;
+                this.hideSecond = false;
             });
     }
 

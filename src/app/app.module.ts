@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PriceTableComponent } from './component/price-table/price-table.component';
 import { PriceCheckerFormComponent } from './component/price-checker-form/price-checker-form.component';
 import { FormsModule }   from '@angular/forms';
+import { Ng2LoadingSpinnerModule } from 'ng2-loading-spinner'
 
 @NgModule({
   declarations: [
@@ -17,7 +18,9 @@ import { FormsModule }   from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    Ng2LoadingSpinnerModule.forRoot({
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

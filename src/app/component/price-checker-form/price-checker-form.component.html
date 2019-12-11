@@ -1,6 +1,6 @@
-<div class="container">
-  <div [hidden]="submitted">
-    <form (ngSubmit)="onSubmit()" #inputNgForm="ngForm">
+<div class="container" [ng2-loading]="showSpinner">
+  <div [hidden]="hideMain">
+    <form #inputNgForm="ngForm">
       <div class="form-group">
 
         <div class="custom-file">
@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-success" (click)="checkPrice()"
+      <button type="submit" class="btn btn-success" (click)="checkPrice();"
               [disabled]="!inputNgForm.form.valid || !filePicked">
         Check
       </button>
@@ -39,8 +39,8 @@
     </form>
   </div>
 
-  <div [hidden]="!submitted">
-    <button class="btn btn-primary" (click)="submitted=false">New check</button>
+  <div [hidden]="hideSecond">
+    <button class="btn btn-primary" (click)="hideSecond=true;hideMain=false">New check</button>
     <button class="btn btn-primary" (click)="download()">Download</button>
   </div>
 </div>
