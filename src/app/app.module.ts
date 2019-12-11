@@ -6,23 +6,28 @@ import { HttpClientModule } from '@angular/common/http';
 import { PriceTableComponent } from './component/price-table/price-table.component';
 import { PriceCheckerFormComponent } from './component/price-checker-form/price-checker-form.component';
 import { FormsModule }   from '@angular/forms';
-import { Ng2LoadingSpinnerModule } from 'ng2-loading-spinner'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoaderComponent } from './component/loader/loader.component'
+import { LoaderService } from './service/loader-service/loader.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     PriceTableComponent,
-    PriceCheckerFormComponent
+    PriceCheckerFormComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    Ng2LoadingSpinnerModule.forRoot({
-    })
+    MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [
+    LoaderService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

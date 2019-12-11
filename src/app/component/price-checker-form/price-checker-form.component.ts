@@ -3,13 +3,14 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 import { saveAs } from 'file-saver';
 import { PriceService } from 'app/service/price-service/price.service';
 import { InputForm }    from 'app/model/input-form/input-form';
+import { LoaderService }    from 'app/service/loader-service/loader.service';
 
 @Component({
     selector: 'app-price-checker-form',
     templateUrl: './price-checker-form.component.html',
     styleUrls: ['./price-checker-form.component.scss']
 })
-export class PriceCheckerFormComponent implements OnInit {
+export class PriceCheckerFormComponent {
 
     inputForm: InputForm = new InputForm(null, 1, 1);
 
@@ -20,10 +21,7 @@ export class PriceCheckerFormComponent implements OnInit {
 
     showSpinner: boolean = false;
 
-    constructor(private priceService: PriceService) { }
-
-    ngOnInit() {
-    }
+    constructor(private priceService: PriceService, private loaderService: LoaderService) { }
 
     fileProgress(fileInput: any) {
         this.inputForm.file = <File>fileInput.target.files[0];
@@ -44,6 +42,7 @@ export class PriceCheckerFormComponent implements OnInit {
     }
 
     checkPrice() {
+        this.loaderService.show();
         this.showSpinner = true;
         const formData = new FormData();
         console.log(this.inputForm.file)
@@ -58,6 +57,7 @@ export class PriceCheckerFormComponent implements OnInit {
                 this.showSpinner = false;
                 this.hideMain = true;
                 this.hideSecond = false;
+                this.loaderService.hide();
             });
     }
 
