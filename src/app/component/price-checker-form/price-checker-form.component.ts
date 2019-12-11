@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { PriceService } from 'app/service/price-service/price.service';
-import { InputForm }    from 'app/model/input-form/input-form';
-import { LoaderService }    from 'app/service/loader-service/loader.service';
+import { InputForm } from 'app/model/input-form/input-form';
+import { LoaderService } from 'app/service/loader-service/loader.service';
 
 @Component({
     selector: 'app-price-checker-form',
@@ -33,12 +33,10 @@ export class PriceCheckerFormComponent {
     checkPrice() {
         this.loaderService.show();
         const formData = new FormData();
-        console.log(this.inputForm.file)
         formData.append('file', this.inputForm.file);
         this.priceService.getPriceTable(formData, this.inputForm.urlColumn, this.inputForm.insertColumn)
             .subscribe((data) => {
                 var b: any = new Blob([data], { type: 'application/binary' });
-                console.log(b)
                 b.lastModifiedDate = new Date();
                 b.name = this.getCurrentFileName(this.inputForm.file.name);
                 this.inputForm.file = <File>b;
