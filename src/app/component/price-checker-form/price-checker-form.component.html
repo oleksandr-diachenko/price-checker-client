@@ -38,5 +38,5 @@
 
     </form>
   </div>
-  <app-complete [checked]="checked" (checkedEvent)="receiveChecked($event)" [file]="inputForm.file"></app-complete>
+  <app-complete [checked]="checked" (uncheckedEvent)="receiveChecked($event)" [file]="inputForm.file"></app-complete>
 </div>

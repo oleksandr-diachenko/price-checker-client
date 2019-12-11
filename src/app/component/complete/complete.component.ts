@@ -12,9 +12,9 @@ export class CompleteComponent {
     @Input() file: File;
     @Input() checked: boolean;
 
-    @Output() checkedEvent = new EventEmitter<boolean>();
-        constructor() {
-    }
+    @Output() uncheckedEvent = new EventEmitter<boolean>();
+
+    constructor() {}
 
     getCurrentFileName(fileName: string) {
         return new Date().valueOf() + '_' + fileName;
@@ -25,6 +25,6 @@ export class CompleteComponent {
     }
 
     uncheck() {
-        this.checkedEvent.emit(false)
+        this.uncheckedEvent.emit(false)
     }
 }
