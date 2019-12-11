@@ -9,7 +9,7 @@ import { saveAs } from 'file-saver';
 })
 export class CompleteComponent {
 
-    @Input() inputForm: InputForm;
+    @Input() file: File;
     @Input() checked: boolean;
 
     @Output() checkedEvent = new EventEmitter<boolean>();
@@ -17,11 +17,11 @@ export class CompleteComponent {
     }
 
     getCurrentFileName(fileName: string) {
-        return new Date().valueOf() + '_' + this.inputForm.file.name;
+        return new Date().valueOf() + '_' + this.file.name;
     }
 
     download() {
-        saveAs(this.inputForm.file, this.getCurrentFileName(this.inputForm.file.name))
+        saveAs(this.file, this.getCurrentFileName(this.file.name))
     }
 
     uncheck() {
