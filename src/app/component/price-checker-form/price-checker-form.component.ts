@@ -14,12 +14,9 @@ export class PriceCheckerFormComponent {
 
     inputForm: InputForm = new InputForm(null, 1, 1);
 
-    hideMain: boolean = false;
-    hideSecond: boolean = true;
+    checked: boolean = false;
 
     filePicked: boolean = false;
-
-    showSpinner: boolean = false;
 
     constructor(private priceService: PriceService, private loaderService: LoaderService) { }
 
@@ -43,7 +40,6 @@ export class PriceCheckerFormComponent {
 
     checkPrice() {
         this.loaderService.show();
-        this.showSpinner = true;
         const formData = new FormData();
         console.log(this.inputForm.file)
         formData.append('file', this.inputForm.file);
@@ -54,9 +50,7 @@ export class PriceCheckerFormComponent {
                 b.lastModifiedDate = new Date();
                 b.name = this.getCurrentFileName(this.inputForm.file.name);
                 this.inputForm.file = <File>b;
-                this.showSpinner = false;
-                this.hideMain = true;
-                this.hideSecond = false;
+                this.checked = true;
                 this.loaderService.hide();
             });
     }

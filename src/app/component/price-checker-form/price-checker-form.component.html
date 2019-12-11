@@ -1,5 +1,5 @@
 <div class="container">
-  <div [hidden]="hideMain">
+  <div [hidden]="checked">
     <form #inputNgForm="ngForm">
       <div class="form-group">
 
@@ -39,8 +39,8 @@
     </form>
   </div>
 
-  <div [hidden]="hideSecond">
-    <button class="btn btn-primary" (click)="hideSecond=true;hideMain=false">New check</button>
+  <div [hidden]="!checked">
+    <button class="btn btn-primary" (click)="checked=false">New check</button>
     <button class="btn btn-primary" (click)="download()">Download</button>
   </div>
 </div>
