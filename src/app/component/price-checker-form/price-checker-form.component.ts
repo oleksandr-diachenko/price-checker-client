@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
-import { saveAs } from 'file-saver';
 import { PriceService } from 'app/service/price-service/price.service';
 import { InputForm }    from 'app/model/input-form/input-form';
 import { LoaderService }    from 'app/service/loader-service/loader.service';
@@ -16,18 +15,11 @@ export class PriceCheckerFormComponent {
 
     checked: boolean = false;
 
-    filePicked: boolean = false;
-
     constructor(private priceService: PriceService, private loaderService: LoaderService) { }
 
     fileProgress(fileInput: any) {
         this.inputForm.file = <File>fileInput.target.files[0];
         this.changeFileInputLabel();
-        if(this.inputForm.file != null) {
-            this.filePicked = true;
-        } else {
-            this.filePicked = false;
-        }
     }
 
     changeFileInputLabel() {

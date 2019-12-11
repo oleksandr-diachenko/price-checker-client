@@ -8,7 +8,7 @@
           <input type="file" class="custom-file-input" id="file" name="file" required
                  (change)="fileProgress($event)">
         </div>
-        <div [hidden]="filePicked" class="alert alert-danger">
+        <div [hidden]="inputForm.file" class="alert alert-danger">
           File is required
         </div>
       </div>
@@ -32,7 +32,7 @@
       </div>
 
       <button type="submit" class="btn btn-success" (click)="checkPrice();"
-              [disabled]="!inputNgForm.form.valid || !filePicked">
+              [disabled]="!inputNgForm.form.valid || !inputForm.file">
         Check
       </button>
 
