@@ -1,8 +1,8 @@
 <div class="container">
   <div [hidden]="checked">
     <form #inputNgForm="ngForm">
-      <div class="form-group">
 
+      <div class="form-group">
         <div class="custom-file">
           <label id="fileInputLabel" class="custom-file-label" for="file">Choose file</label>
           <input type="file" class="custom-file-input" id="file" name="file" required
@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-success" (click)="checkPrice();"
+      <button type="submit" class="btn btn-primary" (click)="checkPrice();"
               [disabled]="!inputNgForm.form.valid || !inputForm.file">
         Check
       </button>
