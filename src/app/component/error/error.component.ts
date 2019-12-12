@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ErrorComponent {
 
-    @Input() isError: boolean;
+    @Input() error: boolean;
 
     constructor() { }
 }

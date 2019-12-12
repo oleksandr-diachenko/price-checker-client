@@ -1,3 +1,5 @@
-<div [hidden]="!isError">
-  ERROR!
+<div class="container">
+  <div [hidden]="!error" class="alert alert-danger">
+    {{error}}
+  </div>
 </div>
