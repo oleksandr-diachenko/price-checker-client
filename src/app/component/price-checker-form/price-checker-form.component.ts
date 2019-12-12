@@ -9,13 +9,17 @@ import { LoaderService } from 'app/service/loader-service/loader.service';
     templateUrl: './price-checker-form.component.html',
     styleUrls: ['./price-checker-form.component.scss']
 })
-export class PriceCheckerFormComponent {
+export class PriceCheckerFormComponent implements OnInit {
 
     inputForm: InputForm = new InputForm(null, 1, 1);
 
     checked: boolean = false;
 
     constructor(private priceService: PriceService, private loaderService: LoaderService) { }
+
+    ngOnInit() {
+        this.priceService.pingApi(); //workaround to start api on heroku
+    }
 
     fileProgress(fileInput: any) {
         this.inputForm.file = <File>fileInput.target.files[0];

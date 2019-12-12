@@ -13,5 +13,9 @@ export class PriceService {
                 formData,
                 {responseType: 'arraybuffer'}
             );
-        }
+    }
+
+    public pingApi() {
+        this.httpClient.get('/actuator');
+    }
 }

@@ -4,6 +4,12 @@ const PROXY_CONFIG = {
     'secure': false,
     'logLevel': 'debug',
     'changeOrigin': true
+  },
+  '/actuator': {
+    'target': 'http://localhost:8080',
+    'secure': false,
+    'logLevel': 'debug',
+    'changeOrigin': true
   }
 };
 
