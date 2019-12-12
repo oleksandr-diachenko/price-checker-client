@@ -15,7 +15,7 @@
 
       <div class="form-group">
         <label for="urlColumn">Enter url column</label>
-        <input type="number" class="form-control" id="urlColumn" name="urlColumn" required
+        <input type="number" class="form-control input-lg" id="urlColumn" name="urlColumn" required
                [(ngModel)]="inputForm.urlColumn" #urlColumn="ngModel">
         <div [hidden]="urlColumn.valid || urlColumn.pristine" class="alert alert-danger">
           Url column number is required
@@ -24,14 +24,14 @@
 
       <div class="form-group">
         <label for="insertColumn">Enter insert column</label>
-        <input type="number" class="form-control" id="insertColumn" name="insertColumn" required
+        <input type="number" class="form-control input-lg" id="insertColumn" name="insertColumn" required
                [(ngModel)]="inputForm.insertColumn" #insertColumn="ngModel">
         <div [hidden]="insertColumn.valid || insertColumn.pristine" class="alert alert-danger">
           Insert column number is required
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary" (click)="checkPrice();"
+      <button type="submit" class="btn btn-primary btn-lg" (click)="checkPrice();"
               [disabled]="!inputNgForm.form.valid || !inputForm.file">
         Check
       </button>
