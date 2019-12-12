@@ -1,5 +1,6 @@
 <div class="container">
   <div [hidden]="checked">
+    <app-error [error]="error"></app-error>
     <form #inputNgForm="ngForm">
 
       <div class="form-group">
@@ -38,6 +39,5 @@
 
     </form>
   </div>
-  <app-error [error]="error"></app-error>
   <app-complete [checked]="checked" (uncheckedEvent)="receiveChecked($event)" [file]="inputForm.file"></app-complete>
 </div>
