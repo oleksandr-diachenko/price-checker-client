@@ -15,6 +15,8 @@ export class PriceCheckerFormComponent implements OnInit {
 
     checked: boolean = false;
 
+    isError: boolean = false;
+
     constructor(private priceService: PriceService, private loaderService: LoaderService) { }
 
     ngOnInit() {
@@ -47,6 +49,7 @@ export class PriceCheckerFormComponent implements OnInit {
             },
             error => {
                 this.loaderService.hide();
+                this.isError = true;
             });
     }
 

@@ -31,12 +31,13 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary btn-lg" (click)="checkPrice();"
+      <button type="submit" class="btn btn-primary btn-lg" (click)="checkPrice();isError=false"
               [disabled]="!inputNgForm.form.valid || !inputForm.file">
         Check
       </button>
 
     </form>
   </div>
+  <app-error [isError]="isError"></app-error>
   <app-complete [checked]="checked" (uncheckedEvent)="receiveChecked($event)" [file]="inputForm.file"></app-complete>
 </div>
