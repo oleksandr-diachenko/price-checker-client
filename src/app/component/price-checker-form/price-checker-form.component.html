@@ -1,12 +1,13 @@
 <div class="container">
   <div [hidden]="checked">
+    <app-error [error]="error"></app-error>
     <form #inputNgForm="ngForm">
-      <div class="form-group">
 
+      <div class="form-group">
         <div class="custom-file">
           <label id="fileInputLabel" class="custom-file-label" for="file">Choose file</label>
           <input type="file" class="custom-file-input" id="file" name="file" required
-                 (change)="fileProgress($event)">
+                 (change)="fileProgress($event)" accept=".xls,.xlsx">
         </div>
         <div [hidden]="inputForm.file" class="alert alert-danger">
           File is required
@@ -15,7 +16,7 @@
 
       <div class="form-group">
         <label for="urlColumn">Enter url column</label>
-        <input type="number" class="form-control" id="urlColumn" name="urlColumn" required
+        <input type="number" class="form-control input-lg" id="urlColumn" name="urlColumn" required
                [(ngModel)]="inputForm.urlColumn" #urlColumn="ngModel">
         <div [hidden]="urlColumn.valid || urlColumn.pristine" class="alert alert-danger">
           Url column number is required
@@ -24,14 +25,14 @@
 
       <div class="form-group">
         <label for="insertColumn">Enter insert column</label>
-        <input type="number" class="form-control" id="insertColumn" name="insertColumn" required
+        <input type="number" class="form-control input-lg" id="insertColumn" name="insertColumn" required
                [(ngModel)]="inputForm.insertColumn" #insertColumn="ngModel">
         <div [hidden]="insertColumn.valid || insertColumn.pristine" class="alert alert-danger">
           Insert column number is required
         </div>
       </div>
 
-      <button type="submit" class="btn btn-success" (click)="checkPrice();"
+      <button type="submit" class="btn btn-primary btn-lg" (click)="checkPrice();error=null"
               [disabled]="!inputNgForm.form.valid || !inputForm.file">
         Check
       </button>

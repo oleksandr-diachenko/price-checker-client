@@ -4,6 +4,12 @@ const PROXY_CONFIG = {
     'secure': false,
     'logLevel': 'debug',
     'changeOrigin': true
+  },
+  '/actuator': {
+    'target': 'https://price-checker-web.herokuapp.com/',
+    'secure': false,
+    'logLevel': 'debug',
+    'changeOrigin': true
   }
 };
 

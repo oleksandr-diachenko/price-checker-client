@@ -12,6 +12,7 @@ import { LoaderService } from './service/loader-service/loader.service';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { CompleteComponent } from './component/complete/complete.component';
+import { ErrorComponent } from './component/error/error.component';
 
 
 
@@ -22,7 +23,8 @@ import { CompleteComponent } from './component/complete/complete.component';
     LoaderComponent,
     HeaderComponent,
     FooterComponent,
-    CompleteComponent
+    CompleteComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
