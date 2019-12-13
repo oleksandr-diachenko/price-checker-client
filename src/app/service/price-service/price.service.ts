@@ -12,6 +12,11 @@ export class PriceService {
         return this.httpClient.post('/api/price-table/' + urlColumn + '/' + insertColumn,
                 formData,
                 {responseType: 'arraybuffer'}
-            );
-        }
+            ).pipe(retry(10));
+    }
+
+    public pingApi() {
+        this.httpClient.get('/actuator')
+            .pipe(retry(10));
+    }
 }
