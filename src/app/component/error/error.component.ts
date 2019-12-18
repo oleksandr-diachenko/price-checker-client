@@ -1,13 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
-    selector: 'app-error',
-    templateUrl: './error.component.html',
-    styleUrls: ['./error.component.scss']
+  selector: 'app-error',
+  templateUrl: './error.component.html',
+  styleUrls: ['./error.component.scss']
 })
 export class ErrorComponent {
 
-    @Input() error: boolean;
+  @Input() error: boolean;
 
-    constructor() { }
+  constructor() {
+  }
 }
