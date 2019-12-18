@@ -3,6 +3,8 @@ import { HttpClient, HttpEventType, HttpErrorResponse } from '@angular/common/ht
 import { PriceService } from 'app/service/price-service/price.service';
 import { InputForm } from 'app/model/input-form/input-form';
 import { LoaderService } from 'app/service/loader-service/loader.service';
+import { interval, Subscription} from 'rxjs';
+import { takeWhile, timeout } from 'rxjs/operators';
 
 @Component({
     selector: 'app-price-checker-form',
@@ -12,6 +14,8 @@ import { LoaderService } from 'app/service/loader-service/loader.service';
 export class PriceCheckerFormComponent implements OnInit {
 
     inputForm: InputForm = new InputForm(null, 1, 1);
+
+    intervalSubscription: Subscription;
 
     checked: boolean = false;
 
@@ -38,9 +42,20 @@ export class PriceCheckerFormComponent implements OnInit {
         this.loaderService.show();
         const formData = new FormData();
         formData.append('file', this.inputForm.file);
-        this.priceService.getPriceTable(formData, this.inputForm.urlColumn, this.inputForm.insertColumn)
-            .subscribe(data => this.handleResponse(data),
-                       error => this.handleError(error));
+        this.priceService.startPriceChecking(formData, this.inputForm.urlColumn, this.inputForm.insertColumn);
+        this.intervalSubscription = interval(5000).subscribe((x => {
+            this.priceService.getPriceTable()
+                             .subscribe(data => {
+                                            if(data.byteLength) {
+                                                this.intervalSubscription.unsubscribe();
+                                                this.handleResponse(data);
+                                            }
+                                        },
+                                        error => {
+                                            this.intervalSubscription.unsubscribe();
+                                            this.handleError(error);
+                                        });
+                                        }));
     }
 
     handleResponse(data: ArrayBuffer) {
