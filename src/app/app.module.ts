@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
-import {PriceCheckerFormComponent} from './component/price-checker-form/price-checker-form.component';
+import {FormComponent} from './component/form/form.component';
 import {PriceService} from './service/price-service/price.service';
 import {FormsModule} from '@angular/forms';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -18,7 +18,7 @@ import {ErrorComponent} from './component/error/error.component';
 @NgModule({
   declarations: [
     AppComponent,
-    PriceCheckerFormComponent,
+    FormComponent,
     LoaderComponent,
     HeaderComponent,
     FooterComponent,

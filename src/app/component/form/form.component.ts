@@ -7,10 +7,10 @@ import {interval, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-price-checker-form',
-  templateUrl: './price-checker-form.component.html',
-  styleUrls: ['./price-checker-form.component.scss']
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.scss']
 })
-export class PriceCheckerFormComponent implements OnInit {
+export class FormComponent implements OnInit {
 
   inputForm: InputForm = new InputForm(null, 1, 1);
 
