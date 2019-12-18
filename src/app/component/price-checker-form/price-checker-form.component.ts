@@ -43,9 +43,8 @@ export class PriceCheckerFormComponent implements OnInit {
         const formData = new FormData();
         formData.append('file', this.inputForm.file);
         this.priceService.startPriceChecking(formData, this.inputForm.urlColumn, this.inputForm.insertColumn);
-        this.intervalSubscription = interval(10000).subscribe((x => {
+        this.intervalSubscription = interval(5000).subscribe((x => {
             this.priceService.getPriceTable()
-                             .pipe(timeout(10000))
                              .subscribe(data => {
                                             if(data.byteLength) {
                                                 this.intervalSubscription.unsubscribe();
