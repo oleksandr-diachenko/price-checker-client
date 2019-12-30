@@ -11,7 +11,7 @@ export class PriceService {
   }
 
   public startPriceChecking(formData: FormData, urlColumn: number, insertColumn: number) {
-    this.httpClient.post('/api/price-check/' + urlColumn + '/' + insertColumn,
+    this.httpClient.post('/api/pricecheck?urlIndex=' + urlColumn + '&insertIndex=' + insertColumn,
       formData).subscribe();
   }
 

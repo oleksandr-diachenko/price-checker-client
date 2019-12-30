@@ -4,6 +4,8 @@ import {PriceService} from 'app/service/price-service/price.service';
 import {InputForm} from 'app/model/input-form/input-form';
 import {LoaderService} from 'app/service/loader-service/loader.service';
 import {interval, Subscription} from 'rxjs';
+import * as Stomp from 'stompjs';
+import * as SockJS from 'sockjs-client';
 
 @Component({
   selector: 'app-price-checker-form',
@@ -11,6 +13,10 @@ import {interval, Subscription} from 'rxjs';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
+
+  private serverUrl = 'http://localhost:8080/socket'
+  private title = 'WebSockets chat';
+  private stompClient;
 
   inputForm: InputForm = new InputForm(null, 1, 1);
 
@@ -21,6 +27,17 @@ export class FormComponent implements OnInit {
   error: string;
 
   constructor(private priceService: PriceService, private loaderService: LoaderService) {
+    let ws = new SockJS(this.serverUrl);
+      this.stompClient = Stomp.over(ws);
+      let that = this;
+      this.stompClient.connect({}, function(frame) {
+        that.stompClient.subscribe("/chat", (message) => {
+          if(message.body) {
+            console.log(message.body);
+            loaderService.hide();
+          }
+        });
+      });
   }
 
   ngOnInit() {
@@ -43,19 +60,6 @@ export class FormComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', this.inputForm.file);
     this.priceService.startPriceChecking(formData, this.inputForm.urlColumn, this.inputForm.insertColumn);
-    this.intervalSubscription = interval(5000).subscribe((x => {
-      this.priceService.getPriceTable()
-        .subscribe(data => {
-            if (data.byteLength) {
-              this.intervalSubscription.unsubscribe();
-              this.handleResponse(data);
-            }
-          },
-          error => {
-            this.intervalSubscription.unsubscribe();
-            this.handleError(error);
-          });
-    }));
   }
 
   handleResponse(data: ArrayBuffer) {
