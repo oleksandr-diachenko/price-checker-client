@@ -33,15 +33,16 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary btn-lg" (click)="checkPrice();error=null;success=null"
-              [disabled]="!inputNgForm.form.valid || !inputForm.file">
-        Check
-      </button>
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary btn-lg" (click)="checkPrice();error=null;success=null"
+                [disabled]="!inputNgForm.form.valid || !inputForm.file">
+          Check
+        </button>
 
-      <button type="button" class="btn btn-secondary btn-lg" (click)="status=true;">
-        Status
-      </button>
-
+        <button type="button" class="btn btn-secondary btn-lg" (click)="status=true;">
+          Statuses
+        </button>
+      </div>
     </form>
   </div>
   <app-status [status]="status" (unstatusEvent)="receiveStatus($event)"></app-status>
