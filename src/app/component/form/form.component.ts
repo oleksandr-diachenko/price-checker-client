@@ -31,7 +31,7 @@ export class FormComponent implements OnInit {
       this.stompClient = Stomp.over(ws);
       let that = this;
       this.stompClient.connect({}, function(frame) {
-        that.stompClient.subscribe("/chat", (message) => {
+        that.stompClient.subscribe("/statuses", (message) => {
           if(message.body) {
             console.log(message.body);
             loaderService.hide();
