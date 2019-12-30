@@ -11,7 +11,7 @@ import {LoaderComponent} from './component/loader/loader.component'
 import {LoaderService} from './service/loader-service/loader.service';
 import {HeaderComponent} from './component/header/header.component';
 import {FooterComponent} from './component/footer/footer.component';
-import {CompleteComponent} from './component/complete/complete.component';
+import {SuccessComponent} from './component/success/success.component';
 import {ErrorComponent} from './component/error/error.component';
 
 
@@ -22,7 +22,7 @@ import {ErrorComponent} from './component/error/error.component';
     LoaderComponent,
     HeaderComponent,
     FooterComponent,
-    CompleteComponent,
+    SuccessComponent,
     ErrorComponent
   ],
   imports: [

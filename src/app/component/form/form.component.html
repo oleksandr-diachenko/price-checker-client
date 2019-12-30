@@ -1,6 +1,7 @@
 <div class="container">
   <div [hidden]="checked">
     <app-error [error]="error"></app-error>
+    <app-success [success]="success"></app-success>
     <form #inputNgForm="ngForm">
 
       <div class="form-group">
@@ -32,12 +33,11 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary btn-lg" (click)="checkPrice();error=null"
+      <button type="submit" class="btn btn-primary btn-lg" (click)="checkPrice();error=null;success=null"
               [disabled]="!inputNgForm.form.valid || !inputForm.file">
         Check
       </button>
 
     </form>
   </div>
-  <app-complete [checked]="checked" (uncheckedEvent)="receiveChecked($event)" [file]="inputForm.file"></app-complete>
 </div>

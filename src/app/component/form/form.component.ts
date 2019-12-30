@@ -26,6 +26,8 @@ export class FormComponent implements OnInit {
 
   error: string;
 
+  success: string;
+
   constructor(private priceService: PriceService, private loaderService: LoaderService) {
     let ws = new SockJS(this.serverUrl);
       this.stompClient = Stomp.over(ws);
@@ -59,16 +61,14 @@ export class FormComponent implements OnInit {
     this.loaderService.show();
     const formData = new FormData();
     formData.append('file', this.inputForm.file);
-    this.priceService.startPriceChecking(formData, this.inputForm.urlColumn, this.inputForm.insertColumn);
+    this.priceService.startPriceChecking(formData, this.inputForm.urlColumn, this.inputForm.insertColumn)
+    .subscribe(data => this.handleResponse(),
+               error => this.handleError(error));
   }
 
-  handleResponse(data: ArrayBuffer) {
-    var b: any = new Blob([data], {type: 'application/binary'});
-    b.lastModifiedDate = new Date();
-    b.name = this.getCurrentFileName(this.inputForm.file.name);
-    this.inputForm.file = <File>b;
-    this.checked = true;
+  handleResponse() {
     this.loaderService.hide();
+    this.success = 'Successfully added to queue!';
   }
 
   handleError(error: HttpErrorResponse) {
