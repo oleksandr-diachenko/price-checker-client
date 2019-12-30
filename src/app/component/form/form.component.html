@@ -1,5 +1,5 @@
 <div class="container">
-  <div [hidden]="checked">
+  <div [hidden]="status">
     <app-error [error]="error"></app-error>
     <app-success [success]="success"></app-success>
     <form #inputNgForm="ngForm">
@@ -38,6 +38,11 @@
         Check
       </button>
 
+      <button type="button" class="btn btn-secondary btn-lg" (click)="status=true;">
+        Status
+      </button>
+
     </form>
   </div>
+  <app-status [status]="status" (unstatusEvent)="receiveStatus($event)"></app-status>
 </div>

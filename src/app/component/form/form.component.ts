@@ -8,7 +8,7 @@ import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 
 @Component({
-  selector: 'app-price-checker-form',
+  selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
@@ -22,7 +22,7 @@ export class FormComponent implements OnInit {
 
   intervalSubscription: Subscription;
 
-  checked: boolean = false;
+  status: boolean = false;
 
   error: string;
 
@@ -80,7 +80,7 @@ export class FormComponent implements OnInit {
     return new Date().valueOf() + '_' + fileName;
   }
 
-  receiveChecked($event) {
-    this.checked = $event
+  receiveStatus($event) {
+    this.status = $event
   }
 }

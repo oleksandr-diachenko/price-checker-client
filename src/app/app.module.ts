@@ -13,6 +13,7 @@ import {HeaderComponent} from './component/header/header.component';
 import {FooterComponent} from './component/footer/footer.component';
 import {SuccessComponent} from './component/success/success.component';
 import {ErrorComponent} from './component/error/error.component';
+import {StatusComponent} from './component/status/status.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {ErrorComponent} from './component/error/error.component';
     HeaderComponent,
     FooterComponent,
     SuccessComponent,
-    ErrorComponent
+    ErrorComponent,
+    StatusComponent
   ],
   imports: [
     BrowserModule,
