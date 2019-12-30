@@ -1,4 +1,21 @@
 <div [hidden]="!status">
-  <p>Status page!</p>
+  <table *ngIf="elements">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th>File ID</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let el of elements">
+      <td>{{el.id}}</td>
+      <td>{{el.name}}</td>
+      <td>{{el.status}}</td>
+      <td>{{el.fileId}}</td>
+    </tr>
+    </tbody>
+  </table>
   <button type="button" class="btn btn-secondary btn-lg" (click)="unstatus()">New check</button>
 </div>

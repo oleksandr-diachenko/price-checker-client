@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter,OnInit } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
+import {MatTableModule} from '@angular/material/table';
 
 @Component({
   selector: 'app-status',
@@ -13,16 +14,21 @@ export class StatusComponent implements OnInit{
   private title = 'WebSockets chat';
   private stompClient;
 
+  elements: string[] = [];
+
  ngOnInit() {
     let ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     let that = this;
     this.stompClient.connect({}, function(frame) {
-    that.stompClient.subscribe("/statuses", (message) => {
-      if(message.body) {
-        console.log(message.body);
-      }
-    });
+      that.stompClient.subscribe("/statuses", (message) => {
+        if(message.body) {
+          this.elements = JSON.parse(message.body);
+          //console.log(message.body);
+          console.log('*******');
+          console.log(this.elements);
+        }
+      });
     });
   }
 
@@ -34,6 +40,7 @@ export class StatusComponent implements OnInit{
   @Output() unstatusEvent = new EventEmitter<boolean>();
 
   unstatus() {
+  console.log(this.elements);
     this.unstatusEvent.emit(false)
   }
 }
