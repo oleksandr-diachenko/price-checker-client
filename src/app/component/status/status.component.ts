@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectorRef } fro
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import {MatTableModule} from '@angular/material/table';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-status',
@@ -15,7 +16,9 @@ export class StatusComponent implements OnInit{
   private stompClient;
 
   displayedColumns = ['id', 'name', 'status', 'fileId'];
-  dataSource: any[] = [{"id":38,"name":"SweetCorea.xlsx","status":"COMPLETED","fileId":37}];
+  arr: any[] = [{"id":38,"name":"SweetCorea.xlsx","status":"COMPLETED","fileId":37}];
+
+  dataSource = new MatTableDataSource(this.arr);
 
  ngOnInit() {
   let ws = new SockJS(this.serverUrl);
@@ -24,9 +27,7 @@ export class StatusComponent implements OnInit{
       this.stompClient.connect({}, function(frame) {
         that.stompClient.subscribe("/statuses", (message) => {
           if(message.body) {
-            this.dataSource = JSON.parse(message.body);
-            console.log('*******');
-            console.log(this.dataSource);
+            this.dataSource = new MatTableDataSource(JSON.parse(message.body));
           }
         });
       });
