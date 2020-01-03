@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import {MatTableModule} from '@angular/material/table';
@@ -16,24 +16,25 @@ export class StatusComponent implements OnInit{
   private stompClient;
 
   displayedColumns = ['id', 'name', 'status', 'fileId'];
-  arr: any[] = [{"id":38,"name":"SweetCorea.xlsx","status":"COMPLETED","fileId":37}];
 
-  dataSource = new MatTableDataSource(this.arr);
+  dataSource: MatTableDataSource<string>;
+
 
  ngOnInit() {
-  let ws = new SockJS(this.serverUrl);
-      this.stompClient = Stomp.over(ws);
-      let that = this;
+    let ws = new SockJS(this.serverUrl);
+    this.stompClient = Stomp.over(ws);
+    let that = this;
       this.stompClient.connect({}, function(frame) {
         that.stompClient.subscribe("/statuses", (message) => {
           if(message.body) {
-            this.dataSource = new MatTableDataSource(JSON.parse(message.body));
+            that.dataSource.data = JSON.parse(message.body);
           }
         });
       });
   }
 
   constructor() {
+   this.dataSource = new MatTableDataSource<string>([]);
   }
 
   @Input() status: boolean;
