@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter,OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectorRef } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import {MatTableModule} from '@angular/material/table';
@@ -14,22 +14,22 @@ export class StatusComponent implements OnInit{
   private title = 'WebSockets chat';
   private stompClient;
 
-  elements: string[] = [];
+  displayedColumns = ['id', 'name', 'status', 'fileId'];
+  dataSource: any[] = [{"id":38,"name":"SweetCorea.xlsx","status":"COMPLETED","fileId":37}];
 
  ngOnInit() {
-    let ws = new SockJS(this.serverUrl);
-    this.stompClient = Stomp.over(ws);
-    let that = this;
-    this.stompClient.connect({}, function(frame) {
-      that.stompClient.subscribe("/statuses", (message) => {
-        if(message.body) {
-          this.elements = JSON.parse(message.body);
-          //console.log(message.body);
-          console.log('*******');
-          console.log(this.elements);
-        }
+  let ws = new SockJS(this.serverUrl);
+      this.stompClient = Stomp.over(ws);
+      let that = this;
+      this.stompClient.connect({}, function(frame) {
+        that.stompClient.subscribe("/statuses", (message) => {
+          if(message.body) {
+            this.dataSource = JSON.parse(message.body);
+            console.log('*******');
+            console.log(this.dataSource);
+          }
+        });
       });
-    });
   }
 
   constructor() {
@@ -40,7 +40,6 @@ export class StatusComponent implements OnInit{
   @Output() unstatusEvent = new EventEmitter<boolean>();
 
   unstatus() {
-  console.log(this.elements);
     this.unstatusEvent.emit(false)
   }
 }

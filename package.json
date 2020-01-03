@@ -29,6 +29,8 @@
     "@swimlane/ngx-datatable": "^16.0.2",
     "@types/file-saver": "^2.0.1",
     "angular-bootstrap-md": "^8.7.0",
+    "angular-material": "^1.0.0",
+    "angular-material-data-table": "^0.10.10",
     "chart.js": "^2.5.0",
     "express": "^4.17.1",
     "file-saver": "^2.0.2",

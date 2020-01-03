@@ -6,7 +6,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormComponent} from './component/form/form.component';
 import {PriceService} from './service/price-service/price.service';
 import {FormsModule} from '@angular/forms';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {LoaderComponent} from './component/loader/loader.component'
 import {LoaderService} from './service/loader-service/loader.service';
 import {HeaderComponent} from './component/header/header.component';
@@ -14,6 +13,7 @@ import {FooterComponent} from './component/footer/footer.component';
 import {SuccessComponent} from './component/success/success.component';
 import {ErrorComponent} from './component/error/error.component';
 import {StatusComponent} from './component/status/status.component';
+import { MatProgressSpinnerModule, MatTableModule } from "@angular/material";
 
 
 @NgModule({
@@ -32,8 +32,9 @@ import {StatusComponent} from './component/status/status.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    MatTableModule,
     MatProgressSpinnerModule
-  ],
+    ],
   providers: [
     LoaderService,
     PriceService
