@@ -19,18 +19,29 @@ export class StatusComponent implements OnInit{
 
   dataSource: MatTableDataSource<string>;
 
-
  ngOnInit() {
-    let ws = new SockJS(this.serverUrl);
-    this.stompClient = Stomp.over(ws);
-    let that = this;
-      this.stompClient.connect({}, function(frame) {
-        that.stompClient.subscribe("/statuses", (message) => {
-          if(message.body) {
-            that.dataSource.data = JSON.parse(message.body);
-          }
-        });
-      });
+    this.connect();
+  }
+
+  connect() {
+   let ws = new SockJS(this.serverUrl);
+      this.stompClient = Stomp.over(ws);
+      let that = this;
+        this.stompClient.connect({}, function(frame) {
+          that.stompClient.subscribe("/statuses", (message) => {
+            if(message.body) {
+              that.dataSource.data = JSON.parse(message.body);
+            }
+          });
+        }, function(error) {
+            that.errorCallBack();
+         });
+  };
+
+  errorCallBack() {
+    setTimeout(() => {
+        this.connect();
+    }, 1000);
   }
 
   constructor() {
