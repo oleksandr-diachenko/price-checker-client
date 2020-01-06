@@ -19,6 +19,10 @@ export class PriceService {
     return this.httpClient.get('/api/price-check/content', {responseType: 'arraybuffer'});
   }
 
+    public getTable(id: number) {
+      return this.httpClient.get('/api/price-check/file/' + id, {responseType: 'arraybuffer'});
+    }
+
   public pingApi() {
     this.httpClient.get('/actuator')
       .pipe(retry(10));

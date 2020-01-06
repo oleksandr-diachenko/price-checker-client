@@ -3,6 +3,8 @@ import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import {MatTableModule} from '@angular/material/table';
 import {MatTableDataSource} from '@angular/material/table';
+import { saveAs } from 'file-saver';
+import { PriceService } from 'app/service/price-service/price.service';
 
 @Component({
   selector: 'app-status',
@@ -44,7 +46,7 @@ export class StatusComponent implements OnInit{
     }, 1000);
   }
 
-  constructor() {
+  constructor(private priceService: PriceService) {
    this.dataSource = new MatTableDataSource<string>([]);
   }
 
@@ -56,7 +58,22 @@ export class StatusComponent implements OnInit{
     this.unstatusEvent.emit(false)
   }
 
-  download(fileId: numeric) {
-    console.log('Clicked download id: ' + fileId)
+  download(fileId: number, name: string) {
+    console.log('Clicked download id: ' + fileId);
+    this.priceService.getTable(fileId)
+      .subscribe(data => {
+      console.log(data);
+           if(data.byteLength) {
+             var b: any = new Blob([data], { type: 'application/binary' });
+              b.lastModifiedDate = new Date();
+              b.name = this.getCurrentFileName(this.getCurrentFileName(name));
+              let file = <File>b;
+              saveAs(file, this.getCurrentFileName(file.name))
+           }
+       });
   }
+
+  getCurrentFileName(fileName: string) {
+          return new Date().valueOf() + '_' + fileName;
+      }
 }
