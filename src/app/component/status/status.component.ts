@@ -23,6 +23,7 @@ export class StatusComponent implements OnInit{
 
  ngOnInit() {
     this.connect();
+    this.priceService.getFileStatuses().subscribe(data => this.dataSource.data = data);
   }
 
   connect() {

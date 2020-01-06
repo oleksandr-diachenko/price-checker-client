@@ -23,6 +23,10 @@ export class PriceService {
       return this.httpClient.get('/api/price-check/file/' + id, {responseType: 'arraybuffer'});
     }
 
+     public getFileStatuses() {
+          return this.httpClient.get('/api/pricecheck/filestatuses/');
+        }
+
   public pingApi() {
     this.httpClient.get('/actuator')
       .pipe(retry(10));
