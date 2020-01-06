@@ -55,4 +55,8 @@ export class StatusComponent implements OnInit{
   unstatus() {
     this.unstatusEvent.emit(false)
   }
+
+  download(fileId: numeric) {
+    console.log('Clicked download id: ' + fileId)
+  }
 }
