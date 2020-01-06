@@ -23,9 +23,12 @@ export class StatusComponent implements OnInit{
 
  ngOnInit() {
     this.connect();
-    this.priceService.getFileStatuses().subscribe(data => this.dataSource.data = data);
+    this.priceService.getFileStatuses().subscribe(data => this.handleFileStatusesResponse(data));
   }
 
+  handleFileStatusesResponse(data: any) {
+    this.dataSource.data = data;
+  }
   connect() {
    let ws = new SockJS(this.serverUrl);
       this.stompClient = Stomp.over(ws);
