@@ -15,7 +15,7 @@ export class StatusComponent implements OnInit{
   private title = 'WebSockets chat';
   private stompClient;
 
-  displayedColumns = ['id', 'name', 'status', 'fileId'];
+  displayedColumns = ['id', 'name', 'status', 'fileId', 'download'];
 
   dataSource: MatTableDataSource<string>;
 
