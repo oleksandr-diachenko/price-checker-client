@@ -13,7 +13,7 @@ import { PriceService } from 'app/service/price-service/price.service';
 })
 export class StatusComponent implements OnInit{
 
-  private serverUrl = 'https://price-checker-web.herokuapp.com/socket'
+  private serverUrl = '/socket'
   private title = 'WebSockets chat';
   private stompClient;
 
