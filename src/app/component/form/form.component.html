@@ -1,49 +1,49 @@
 <div class="container">
-  <div [hidden]="status">
-    <app-error [error]="error"></app-error>
-    <app-success [success]="success"></app-success>
-    <form #inputNgForm="ngForm">
+    <div [hidden]="status">
+        <app-error [error]="error"></app-error>
+        <app-success [success]="success"></app-success>
+        <form #inputNgForm="ngForm">
 
-      <div class="form-group">
-        <div class="custom-file">
-          <label id="fileInputLabel" class="custom-file-label text-black-50" for="file">Choose file</label>
-          <input type="file" class="custom-file-input" id="file" name="file" required
-                 (change)="fileProgress($event)" accept=".xls,.xlsx">
-        </div>
-        <div [hidden]="inputForm.file" class="alert alert-danger">
-          File is required
-        </div>
-      </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <label class="custom-file-label text-black-50" for="file" id="fileInputLabel">Choose file</label>
+                    <input (change)="fileProgress($event)" accept=".xls,.xlsx" class="custom-file-input" id="file" name="file"
+                           required type="file">
+                </div>
+                <div [hidden]="inputForm.file" class="alert alert-danger">
+                    File is required
+                </div>
+            </div>
 
-      <div class="form-group">
-        <label for="urlColumn" class="font-weight-light text-black-50">Enter url column</label>
-        <input type="number" class="form-control input-lg" id="urlColumn" name="urlColumn" required
-               [(ngModel)]="inputForm.urlColumn" #urlColumn="ngModel">
-        <div [hidden]="urlColumn.valid || urlColumn.pristine" class="alert alert-danger">
-          Url column number is required
-        </div>
-      </div>
+            <div class="form-group">
+                <label class="font-weight-light text-black-50" for="urlColumn">Enter url column</label>
+                <input #urlColumn="ngModel" [(ngModel)]="inputForm.urlColumn" class="form-control input-lg" id="urlColumn" name="urlColumn"
+                       required type="number">
+                <div [hidden]="urlColumn.valid || urlColumn.pristine" class="alert alert-danger">
+                    Url column number is required
+                </div>
+            </div>
 
-      <div class="form-group">
-        <label for="insertColumn" class="font-weight-light text-black-50">Enter insert column</label>
-        <input type="number" class="form-control input-lg" id="insertColumn" name="insertColumn" required
-               [(ngModel)]="inputForm.insertColumn" #insertColumn="ngModel">
-        <div [hidden]="insertColumn.valid || insertColumn.pristine" class="alert alert-danger">
-          Insert column number is required
-        </div>
-      </div>
+            <div class="form-group">
+                <label class="font-weight-light text-black-50" for="insertColumn">Enter insert column</label>
+                <input #insertColumn="ngModel" [(ngModel)]="inputForm.insertColumn" class="form-control input-lg" id="insertColumn" name="insertColumn"
+                       required type="number">
+                <div [hidden]="insertColumn.valid || insertColumn.pristine" class="alert alert-danger">
+                    Insert column number is required
+                </div>
+            </div>
 
-      <div class="d-flex justify-content-between">
-        <button type="submit" class="btn btn-primary btn-lg" (click)="checkPrice();error=null;success=null"
-                [disabled]="!inputNgForm.form.valid || !inputForm.file">
-          Check
-        </button>
+            <div class="d-flex justify-content-between">
+                <button (click)="checkPrice();error=null;success=null" [disabled]="!inputNgForm.form.valid || !inputForm.file" class="btn btn-primary btn-lg"
+                        type="submit">
+                    Check
+                </button>
 
-        <button type="button" class="btn btn-secondary btn-lg" (click)="status=true;">
-          Statuses
-        </button>
-      </div>
-    </form>
-  </div>
-  <app-status [status]="status" (unstatusEvent)="receiveStatus($event)"></app-status>
+                <button (click)="status=true;" class="btn btn-secondary btn-lg" type="button">
+                    Statuses
+                </button>
+            </div>
+        </form>
+    </div>
+    <app-status (unstatusEvent)="receiveStatus($event)" [status]="status"></app-status>
 </div>

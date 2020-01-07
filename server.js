@@ -7,24 +7,24 @@ app.use(express.static('dist/price-checker-client'));
 
 // Add middleware for http proxying
 app.use(
-  '/api',
-  proxy({ target: 'https://price-checker-web.herokuapp.com', changeOrigin: true })
+    '/api',
+    proxy({target: 'https://price-checker-web.herokuapp.com', changeOrigin: true})
 );
 app.use(
-  '/actuator',
-  proxy({ target: 'https://price-checker-web.herokuapp.com', changeOrigin: true })
+    '/actuator',
+    proxy({target: 'https://price-checker-web.herokuapp.com', changeOrigin: true})
 );
 app.use(
-  '/socket',
-  proxy({ target: 'https://price-checker-web.herokuapp.com', changeOrigin: true })
+    '/socket',
+    proxy({target: 'https://price-checker-web.herokuapp.com', changeOrigin: true})
 );
 
 // Render your site
 const renderIndex = (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'dist/price-checker-client/index.html'));
+    res.sendFile(path.resolve(__dirname, 'dist/price-checker-client/index.html'));
 }
 app.get('/*', renderIndex);
 
 app.listen((process.env.PORT || 3000), () => {
-  console.log('Listening on: https://price-checker-web.herokuapp.com/');
+    console.log('Listening on: https://price-checker-web.herokuapp.com/');
 });
