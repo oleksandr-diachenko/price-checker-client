@@ -18,6 +18,10 @@ app.use(
     '/socket',
     proxy({target: 'https://price-checker-web.herokuapp.com', changeOrigin: true})
 );
+app.use(
+  '/socket',
+  proxy({ target: 'https://price-checker-web.herokuapp.com', changeOrigin: true })
+);
 
 // Render your site
 const renderIndex = (req, res) => {
