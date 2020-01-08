@@ -1,69 +1,55 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
 import {PriceService} from 'app/service/price-service/price.service';
 import {InputForm} from 'app/model/input-form/input-form';
 import {LoaderService} from 'app/service/loader-service/loader.service';
-import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'app-form',
     templateUrl: './form.component.html',
     styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements OnInit {
+export class FormComponent {
 
-    inputForm: InputForm = new InputForm(null, 1, 1);
-
-    intervalSubscription: Subscription;
-
-    status: boolean = false;
-
-    error: string;
-
-    success: string;
+    private inputForm = new InputForm(null, 1, 1);
+    private isStatusesView = false;
+    private errorMessage: string;
+    private successMessage: string;
 
     constructor(private priceService: PriceService, private loaderService: LoaderService) {
     }
 
-    ngOnInit() {
-        this.priceService.pingApi(); //workaround to start api on heroku
-    }
-
-    fileProgress(fileInput: any) {
-        this.inputForm.file = <File>fileInput.target.files[0];
+    public fileProgress(fileInput: any): void {
+        this.inputForm.file = fileInput.target.files[0] as File;
         this.changeFileInputLabel();
     }
 
-    changeFileInputLabel() {
+    private changeFileInputLabel(): void {
         document.getElementById('fileInputLabel').innerHTML = this.inputForm.file
             ? this.inputForm.file.name
             : 'Choose file';
     }
 
-    checkPrice() {
+    public checkPrice(): void {
         this.loaderService.show();
         const formData = new FormData();
         formData.append('file', this.inputForm.file);
-        this.priceService.startPriceChecking(formData, this.inputForm.urlColumn, this.inputForm.insertColumn)
-            .subscribe(data => this.handleResponse(),
+        this.priceService.processFile(formData, this.inputForm.urlColumn, this.inputForm.insertColumn)
+            .subscribe(() => this.handleResponse(),
                 error => this.handleError(error));
     }
 
-    handleResponse() {
+     private handleResponse(): void {
         this.loaderService.hide();
-        this.success = 'Successfully added to queue!';
+        this.successMessage = 'Successfully added to queue!';
     }
 
-    handleError(error: HttpErrorResponse) {
+    private handleError(error: HttpErrorResponse): void {
         this.loaderService.hide();
-        this.error = error.message;
+        this.errorMessage = error.message;
     }
 
-    getCurrentFileName(fileName: string) {
-        return new Date().valueOf() + '_' + fileName;
-    }
-
-    receiveStatus($event) {
-        this.status = $event
+    public receiveStatus($event): void {
+        this.isStatusesView = $event;
     }
 }

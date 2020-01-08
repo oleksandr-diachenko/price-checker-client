@@ -13,7 +13,7 @@ import {FooterComponent} from './component/footer/footer.component';
 import {SuccessComponent} from './component/success/success.component';
 import {ErrorComponent} from './component/error/error.component';
 import {StatusComponent} from './component/status/status.component';
-import {MatProgressSpinnerModule, MatTableModule} from "@angular/material";
+import {MatButtonModule, MatProgressSpinnerModule, MatTableModule} from '@angular/material';
 
 
 @NgModule({
@@ -33,7 +33,8 @@ import {MatProgressSpinnerModule, MatTableModule} from "@angular/material";
         HttpClientModule,
         FormsModule,
         MatTableModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatButtonModule
     ],
     providers: [
         LoaderService,

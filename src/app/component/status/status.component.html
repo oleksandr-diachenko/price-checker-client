@@ -1,39 +1,39 @@
-<div [hidden]="!status">
+<div [hidden]="!isStatusesView">
 
     <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
 
         <ng-container matColumnDef="id">
             <th *matHeaderCellDef mat-header-cell> Id</th>
-            <td *matCellDef="let element" mat-cell> {{element.id}} </td>
+            <td *matCellDef="let fileStatus" mat-cell> {{fileStatus.id}} </td>
         </ng-container>
 
         <ng-container matColumnDef="name">
             <th *matHeaderCellDef mat-header-cell> Name</th>
-            <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+            <td *matCellDef="let fileStatus" mat-cell> {{fileStatus.name}} </td>
         </ng-container>
 
         <ng-container matColumnDef="status">
             <th *matHeaderCellDef mat-header-cell> Status</th>
-            <td *matCellDef="let element" mat-cell> {{element.status}} </td>
+            <td *matCellDef="let fileStatus" mat-cell> {{fileStatus.status}} </td>
         </ng-container>
 
         <ng-container matColumnDef="acceptedTime">
             <th *matHeaderCellDef mat-header-cell> Accepted time</th>
-            <td *matCellDef="let element" mat-cell>{{element.acceptedTime}}</td>
+            <td *matCellDef="let fileStatus" mat-cell>{{fileStatus.acceptedTime}}</td>
         </ng-container>
 
         <ng-container matColumnDef="download">
             <th *matHeaderCellDef mat-header-cell> Download</th>
-            <td *matCellDef="let element" mat-cell>
-                <button (click)="download(element.fileId, element.name)" [hidden]="element.status != 'COMPLETED'"
-                        mat-button>Download
+            <td *matCellDef="let fileStatus" mat-cell>
+                <button mat-button (click)="download(fileStatus.fileId, fileStatus.name)"
+                        [hidden]="fileStatus.status != 'COMPLETED'">Download
                 </button>
             </td>
         </ng-container>
 
-        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+        <tr *matHeaderRowDef="columns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: columns;" mat-row></tr>
     </table>
 
-    <button (click)="unstatus()" class="btn btn-secondary btn-lg" type="button">New check</button>
+    <button (click)="switchToFormView()" class="btn btn-secondary btn-lg" type="button">New check</button>
 </div>
