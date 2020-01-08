@@ -34,6 +34,5 @@
         <tr *matHeaderRowDef="columns" mat-header-row></tr>
         <tr *matRowDef="let row; columns: columns;" mat-row></tr>
     </table>
-
-    <button (click)="switchToFormView()" class="btn btn-secondary btn-lg" type="button">New check</button>
+    <button mat-button (click)="switchToFormView()">New check</button>
 </div>
