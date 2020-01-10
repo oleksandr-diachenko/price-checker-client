@@ -1,7 +1,7 @@
 <div [hidden]="isStatusesView">
-    <app-error [errorMessage]="errorMessage"></app-error>
-    <app-success [successMessage]="successMessage"></app-success>
     <form class="form">
+        <app-error [errorMessage]="errorMessage"></app-error>
+        <app-success [successMessage]="successMessage"></app-success>
         <div class="custom-file">
             <label class="custom-file-label text-black-50" for="file" id="fileInputLabel">Choose file</label>
             <input (change)="fileProgress($event)" accept=".xls,.xlsx" class="custom-file-input" id="file" name="file"
