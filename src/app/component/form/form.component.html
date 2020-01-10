@@ -1,5 +1,5 @@
 <div [hidden]="isStatusesView">
-    <form class="form">
+    <form class="form" #inputNgForm="ngForm">
         <app-error [errorMessage]="errorMessage"></app-error>
         <app-success [successMessage]="successMessage"></app-success>
         <div class="custom-file">
@@ -11,7 +11,7 @@
             File is required
         </div>
         <mat-form-field>
-            <input matInput type="number" placeholder="Url column" [(ngModel)]="inputForm.urlColumn"
+            <input matInput type="number" [min]="1" placeholder="Url column" [(ngModel)]="inputForm.urlColumn"
                    name="urlColumn" required>
         </mat-form-field>
         <mat-form-field>
@@ -20,7 +20,7 @@
         </mat-form-field>
         <div class="d-flex justify-content-between">
             <button mat-button (click)="checkPrice();errorMessage=null;successMessage=null"
-                    [disabled]="!inputForm.file">
+                    [disabled]="!inputNgForm.form.valid || !inputForm.file" color="primary">
                 Check
             </button>
 
