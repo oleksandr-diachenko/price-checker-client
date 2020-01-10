@@ -1,7 +1,17 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block" rel="stylesheet">
 
 <div [hidden]="isStatusesView">
+    <app-error [errorMessage]="errorMessage"></app-error>
+    <app-success [successMessage]="successMessage"></app-success>
     <form class="form">
+        <div class="custom-file">
+            <label class="custom-file-label text-black-50" for="file" id="fileInputLabel">Choose file</label>
+            <input (change)="fileProgress($event)" accept=".xls,.xlsx" class="custom-file-input" id="file" name="file"
+                   required type="file">
+        </div>
+        <div [hidden]="inputForm.file" class="alert alert-danger">
+            File is required
+        </div>
         <mat-form-field>
             <input matInput type="number" placeholder="Url column" [(ngModel)]="inputForm.urlColumn"
                    name="urlColumn" required>
@@ -10,72 +20,16 @@
             <input matInput type="number" placeholder="Insert column" [(ngModel)]="inputForm.insertColumn"
                    name="insertColumn" required>
         </mat-form-field>
+        <div class="d-flex justify-content-between">
+            <button mat-button (click)="checkPrice();errorMessage=null;successMessage=null"
+                    [disabled]="!inputForm.file">
+                Check
+            </button>
+
+            <button mat-button (click)="isStatusesView=true">
+                Statuses
+            </button>
+        </div>
     </form>
-    <app-error [errorMessage]="errorMessage"></app-error>
-    <app-success [successMessage]="successMessage"></app-success>
 </div>
-
-<!--        <form [formGroup]="options">-->
-
-<!--&lt;!&ndash;            <div class="form-group">&ndash;&gt;-->
-<!--&lt;!&ndash;                <div class="custom-file">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <label class="custom-file-label text-black-50" for="file" id="fileInputLabel">Choose file</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <input (change)="fileProgress($event)" accept=".xls,.xlsx" class="custom-file-input" id="file" name="file"&ndash;&gt;-->
-<!--&lt;!&ndash;                           required type="file">&ndash;&gt;-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                <div [hidden]="inputForm.file" class="alert alert-danger">&ndash;&gt;-->
-<!--&lt;!&ndash;                    File is required&ndash;&gt;-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--            <mat-form-field>-->
-<!--                <input matInput type="number" placeholder="Url column number" formControlName="urlColumn" min="1">-->
-<!--                <mat-error *ngIf="options.get('urlColumn')?.invalid">Number should be positive</mat-error>-->
-<!--            </mat-form-field>-->
-<!--        </form>-->
-<!--    </div>-->
-<!--</div>-->
-<!--&lt;!&ndash;            <md-input-container>&ndash;&gt;-->
-<!--&lt;!&ndash;                <label class="font-weight-light text-black-50" for="urlColumn">Enter url column</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input mdInput #urlColumn="ngModel" [(ngModel)]="inputForm.urlColumn" id="urlColumn" name="urlColumn"&ndash;&gt;-->
-<!--&lt;!&ndash;                       required type="number">&ndash;&gt;-->
-<!--&lt;!&ndash;                <div [hidden]="urlColumn.valid || urlColumn.pristine" class="alert alert-danger">&ndash;&gt;-->
-<!--&lt;!&ndash;                    Url column number is required&ndash;&gt;-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            </md-input-container>&ndash;&gt;-->
-
-<!--&lt;!&ndash;            <div class="form-group">&ndash;&gt;-->
-<!--&lt;!&ndash;                <label class="font-weight-light text-black-50" for="insertColumn">Enter insert column</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input #insertColumn="ngModel" [(ngModel)]="inputForm.insertColumn" class="form-control input-lg" id="insertColumn" name="insertColumn"&ndash;&gt;-->
-<!--&lt;!&ndash;                       required type="number">&ndash;&gt;-->
-<!--&lt;!&ndash;                <div [hidden]="insertColumn.valid || insertColumn.pristine" class="alert alert-danger">&ndash;&gt;-->
-<!--&lt;!&ndash;                    Insert column number is required&ndash;&gt;-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-
-<!--&lt;!&ndash;            <div class="d-flex justify-content-between">&ndash;&gt;-->
-<!--&lt;!&ndash;                <button mat-button (click)="checkPrice();errorMessage=null;successMessage=null" [disabled]="!inputNgForm.form.valid || !inputForm.file">&ndash;&gt;-->
-<!--&lt;!&ndash;                    Check&ndash;&gt;-->
-<!--&lt;!&ndash;                </button>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                <button mat-button (click)="isStatusesView=true">&ndash;&gt;-->
-<!--&lt;!&ndash;                    Statuses&ndash;&gt;-->
-<!--&lt;!&ndash;                </button>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;        </form>&ndash;&gt;-->
-<!--&lt;!&ndash;    </div>&ndash;&gt;-->
-<!--&lt;!&ndash;    <app-status (unstatusEvent)="receiveStatus($event)" [isStatusesView]="isStatusesView"></app-status>&ndash;&gt;-->
-<!--&lt;!&ndash;</div>&ndash;&gt;-->
-<!--&lt;!&ndash;<form class="example-container" [formGroup]="options" [style.fontSize.px]="getFontSize()">&ndash;&gt;-->
-<!--&lt;!&ndash;    <mat-form-field [color]="options.value.color">&ndash;&gt;-->
-<!--&lt;!&ndash;        <mat-select placeholder="Color" formControlName="color">&ndash;&gt;-->
-<!--&lt;!&ndash;            <mat-option value="primary">Primary</mat-option>&ndash;&gt;-->
-<!--&lt;!&ndash;            <mat-option value="accent">Accent</mat-option>&ndash;&gt;-->
-<!--&lt;!&ndash;            <mat-option value="warn">Warn</mat-option>&ndash;&gt;-->
-<!--&lt;!&ndash;        </mat-select>&ndash;&gt;-->
-<!--&lt;!&ndash;    </mat-form-field>&ndash;&gt;-->
-
-<!--&lt;!&ndash;    <mat-form-field [color]="options.value.color">&ndash;&gt;-->
-<!--&lt;!&ndash;        <input matInput type="number" placeholder="Font size (px)" formControlName="fontSize" min="10">&ndash;&gt;-->
-<!--&lt;!&ndash;        <mat-error *ngIf="options.get('fontSize')?.invalid">Min size: 10px</mat-error>&ndash;&gt;-->
-<!--&lt;!&ndash;    </mat-form-field>&ndash;&gt;-->
-<!--&lt;!&ndash;</form>&ndash;&gt;-->
+<app-status (unstatusEvent)="receiveStatus($event)" [isStatusesView]="isStatusesView"></app-status>
