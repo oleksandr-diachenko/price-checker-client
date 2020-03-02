@@ -7,7 +7,7 @@ import {Component, Input} from '@angular/core';
 })
 export class SuccessComponent {
 
-    @Input() private successMessage: string;
+    @Input() public successMessage: string;
 
     constructor() {
     }

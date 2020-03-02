@@ -12,10 +12,10 @@ import {PriceService} from 'app/service/price-service/price.service';
 })
 export class StatusComponent implements OnInit {
 
-    private columns = ['id', 'name', 'status', 'acceptedTime', 'download'];
-    private dataSource: MatTableDataSource<string>;
-    @Input() private isStatusesView: boolean;
-    @Output() private unstatusEvent = new EventEmitter<boolean>();
+    public columns = ['id', 'name', 'status', 'acceptedTime', 'download'];
+    public dataSource: MatTableDataSource<string>;
+    @Input() public isStatusesView: boolean;
+    @Output() public unstatusEvent = new EventEmitter<boolean>();
     private url = '/socket';
     private stomp: Stomp;
 
