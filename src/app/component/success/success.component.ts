@@ -1,14 +1,13 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {saveAs} from 'file-saver';
+import {Component, Input} from '@angular/core';
 
 @Component({
-  selector: 'app-success',
-  templateUrl: './success.component.html',
-  styleUrls: ['./success.component.scss']
+    selector: 'app-success',
+    templateUrl: './success.component.html',
+    styleUrls: ['./success.component.scss']
 })
 export class SuccessComponent {
 
-    @Input() success: boolean;
+    @Input() private successMessage: string;
 
     constructor() {
     }

@@ -13,33 +13,34 @@ import {FooterComponent} from './component/footer/footer.component';
 import {SuccessComponent} from './component/success/success.component';
 import {ErrorComponent} from './component/error/error.component';
 import {StatusComponent} from './component/status/status.component';
-import { MatProgressSpinnerModule, MatTableModule } from "@angular/material";
+import {MatButtonModule, MatProgressSpinnerModule, MatTableModule} from '@angular/material';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FormComponent,
-    LoaderComponent,
-    HeaderComponent,
-    FooterComponent,
-    SuccessComponent,
-    ErrorComponent,
-    StatusComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    MatTableModule,
-    MatProgressSpinnerModule
+    declarations: [
+        AppComponent,
+        FormComponent,
+        LoaderComponent,
+        HeaderComponent,
+        FooterComponent,
+        SuccessComponent,
+        ErrorComponent,
+        StatusComponent
     ],
-  providers: [
-    LoaderService,
-    PriceService
-  ],
-  bootstrap: [AppComponent]
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        MatTableModule,
+        MatProgressSpinnerModule,
+        MatButtonModule
+    ],
+    providers: [
+        LoaderService,
+        PriceService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

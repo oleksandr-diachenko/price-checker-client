@@ -1,37 +1,38 @@
-<div [hidden]="!status">
+<div [hidden]="!isStatusesView">
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <table [dataSource]="dataSource" class="mat-elevation-z8 table-striped" mat-table>
 
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> Id </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
+        <ng-container matColumnDef="id">
+            <th *matHeaderCellDef mat-header-cell> Id</th>
+            <td *matCellDef="let fileStatus" mat-cell> {{fileStatus.id}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
+        <ng-container matColumnDef="name">
+            <th *matHeaderCellDef mat-header-cell> Name</th>
+            <td *matCellDef="let fileStatus" mat-cell> {{fileStatus.name}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef> Status </th>
-      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
-    </ng-container>
+        <ng-container matColumnDef="status">
+            <th *matHeaderCellDef mat-header-cell> Status</th>
+            <td *matCellDef="let fileStatus" mat-cell> {{fileStatus.status}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="fileId">
-      <th mat-header-cell *matHeaderCellDef> File id </th>
-      <td mat-cell *matCellDef="let element"> {{element.fileId}} </td>
-    </ng-container>
+        <ng-container matColumnDef="acceptedTime">
+            <th *matHeaderCellDef mat-header-cell> Accepted time</th>
+            <td *matCellDef="let fileStatus" mat-cell>{{fileStatus.acceptedTime}}</td>
+        </ng-container>
 
-    <ng-container matColumnDef="download">
-      <th mat-header-cell  *matHeaderCellDef > Download </th>
-      <td mat-cell *matCellDef="let element" >
-        <button mat-button  [hidden]="element.status != 'COMPLETED'" (click)="download(element.fileId, element.name)">Download</button>
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="download">
+            <th *matHeaderCellDef mat-header-cell> Download</th>
+            <td *matCellDef="let fileStatus" mat-cell>
+                <button mat-button (click)="download(fileStatus.fileId, fileStatus.name)"
+                        [hidden]="fileStatus.status != 'COMPLETED'">Download
+                </button>
+            </td>
+        </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
-  <button type="button" class="btn btn-secondary btn-lg" (click)="unstatus()">New check</button>
+        <tr *matHeaderRowDef="columns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: columns;" mat-row></tr>
+    </table>
+    <button mat-button (click)="switchToFormView()">New check</button>
 </div>

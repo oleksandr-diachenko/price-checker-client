@@ -1,83 +1,77 @@
-import { Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
-import {MatTableModule} from '@angular/material/table';
 import {MatTableDataSource} from '@angular/material/table';
-import { saveAs } from 'file-saver';
-import { PriceService } from 'app/service/price-service/price.service';
+import {saveAs} from 'file-saver';
+import {PriceService} from 'app/service/price-service/price.service';
 
 @Component({
-  selector: 'app-status',
-  templateUrl: './status.component.html',
-  styleUrls: ['./status.component.scss']
+    selector: 'app-status',
+    templateUrl: './status.component.html',
+    styleUrls: ['./status.component.scss']
 })
-export class StatusComponent implements OnInit{
+export class StatusComponent implements OnInit {
 
-  private serverUrl = '/socket'
-  private title = 'WebSockets chat';
-  private stompClient;
+    private columns = ['id', 'name', 'status', 'acceptedTime', 'download'];
+    private dataSource: MatTableDataSource<string>;
+    @Input() private isStatusesView: boolean;
+    @Output() private unstatusEvent = new EventEmitter<boolean>();
+    private url = '/socket';
+    private stomp: Stomp;
 
-  displayedColumns = ['id', 'name', 'status', 'fileId', 'download'];
+    constructor(private priceService: PriceService) {
+        this.dataSource = new MatTableDataSource<string>([]);
+    }
 
-  dataSource: MatTableDataSource<string>;
+    private static getCurrentFileName(fileName: string) {
+        return new Date().valueOf() + '_' + fileName;
+    }
 
- ngOnInit() {
-    this.connect();
-    this.priceService.getFileStatuses().subscribe(data => this.handleFileStatusesResponse(data));
-  }
-
-  handleFileStatusesResponse(data: any) {
-    this.dataSource.data = data;
-  }
-  connect() {
-   let ws = new SockJS(this.serverUrl);
-      this.stompClient = Stomp.over(ws);
-      let that = this;
-        this.stompClient.connect({}, function(frame) {
-          that.stompClient.subscribe("/statuses", (message) => {
-            if(message.body) {
-              that.dataSource.data = JSON.parse(message.body);
-            }
-          });
-        }, function(error) {
-            that.errorCallBack();
-         });
-  };
-
-  errorCallBack() {
-    setTimeout(() => {
+    ngOnInit(): void {
         this.connect();
-    }, 1000);
-  }
+        this.priceService.getFileStatuses().subscribe(data => this.handleFileStatusesResponse(data));
+    }
 
-  constructor(private priceService: PriceService) {
-   this.dataSource = new MatTableDataSource<string>([]);
-  }
+    private handleFileStatusesResponse(data: any): void {
+        this.dataSource.data = data;
+    }
 
-  @Input() status: boolean;
+    private connect() {
+        const ws = new SockJS(this.url);
+        this.stomp = Stomp.over(ws);
+        const that = this;
+        this.stomp.connect({}, () => {
+            that.stomp.subscribe('/statuses', (message) => {
+                if (message.body) {
+                    that.dataSource.data = JSON.parse(message.body);
+                }
+            });
+        }, () => {
+            that.errorCallBack();
+        });
+    }
 
-  @Output() unstatusEvent = new EventEmitter<boolean>();
+    private errorCallBack() {
+        setTimeout(() => {
+            this.connect();
+        }, 1000);
+    }
 
-  unstatus() {
-    this.unstatusEvent.emit(false)
-  }
+    public switchToFormView() {
+        this.unstatusEvent.emit(false);
+    }
 
-  download(fileId: number, name: string) {
-    console.log('Clicked download id: ' + fileId);
-    this.priceService.getTable(fileId)
-      .subscribe(data => {
-      console.log(data);
-           if(data.byteLength) {
-             var b: any = new Blob([data], { type: 'application/binary' });
-              b.lastModifiedDate = new Date();
-              b.name = this.getCurrentFileName(this.getCurrentFileName(name));
-              let file = <File>b;
-              saveAs(file, this.getCurrentFileName(file.name))
-           }
-       });
-  }
-
-  getCurrentFileName(fileName: string) {
-          return new Date().valueOf() + '_' + fileName;
-      }
+    public download(fileId: number, name: string) {
+        this.priceService.getFileById(fileId)
+            .subscribe(data => {
+                console.log(data);
+                if (data.byteLength) {
+                    const blob: any = new Blob([data], {type: 'application/binary'});
+                    blob.lastModifiedDate = new Date();
+                    blob.name = StatusComponent.getCurrentFileName(StatusComponent.getCurrentFileName(name));
+                    const file = blob as File;
+                    saveAs(file, StatusComponent.getCurrentFileName(file.name));
+                }
+            });
+    }
 }

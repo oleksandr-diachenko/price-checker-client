@@ -3,18 +3,17 @@ import {LoaderService} from 'app/service/loader-service/loader.service';
 import {Subject} from 'rxjs';
 
 @Component({
-  selector: 'app-loader',
-  templateUrl: './loader.component.html',
-  styleUrls: ['./loader.component.scss']
+    selector: 'app-loader',
+    templateUrl: './loader.component.html',
+    styleUrls: ['./loader.component.scss']
 })
 export class LoaderComponent {
 
-  color = 'primary';
-  mode = 'indeterminate';
-  value = 50;
+    private color = 'primary';
+    private mode = 'indeterminate';
+    private value = 50;
+    private isLoading: Subject<boolean> = this.loaderService.isLoading;
 
-  constructor(private loaderService: LoaderService) {
-  }
-
-  isLoading: Subject<boolean> = this.loaderService.isLoading;
+    constructor(private loaderService: LoaderService) {
+    }
 }
