@@ -20,7 +20,7 @@
         </mat-form-field>
         <div class="d-flex justify-content-between">
             <button mat-button (click)="checkPrice();errorMessage=null;successMessage=null"
-                    [disabled]="!inputNgForm.form.valid || !inputForm.file" color="primary">
+                    [disabled]="!inputNgForm.form.valid || !inputForm.file || inputForm.urlColumn < 1 || inputForm.insertColumn < 1" color="primary">
                 Check
             </button>
 
