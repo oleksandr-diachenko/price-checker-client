@@ -1,48 +1,33 @@
-<div class="container">
-    <div [hidden]="isStatusesView">
+<div [hidden]="isStatusesView">
+    <form class="form" #inputNgForm="ngForm">
         <app-error [errorMessage]="errorMessage"></app-error>
         <app-success [successMessage]="successMessage"></app-success>
-        <form #inputNgForm="ngForm">
+        <div class="custom-file">
+            <label class="custom-file-label text-black-50" for="file" id="fileInputLabel">Choose file</label>
+            <input (change)="fileProgress($event)" accept=".xls,.xlsx" class="custom-file-input" id="file" name="file"
+                   required type="file">
+        </div>
+        <div [hidden]="inputForm.file" class="alert alert-danger">
+            File is required
+        </div>
+        <mat-form-field>
+            <input matInput type="number" [min]="1" placeholder="Url column" [(ngModel)]="inputForm.urlColumn"
+                   name="urlColumn" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="number" placeholder="Insert column" [(ngModel)]="inputForm.insertColumn"
+                   name="insertColumn" required>
+        </mat-form-field>
+        <div class="d-flex justify-content-between">
+            <button mat-button (click)="checkPrice();errorMessage=null;successMessage=null"
+                    [disabled]="!inputNgForm.form.valid || !inputForm.file || inputForm.urlColumn < 1 || inputForm.insertColumn < 1" color="primary">
+                Check
+            </button>
 
-            <div class="form-group">
-                <div class="custom-file">
-                    <label class="custom-file-label text-black-50" for="file" id="fileInputLabel">Choose file</label>
-                    <input (change)="fileProgress($event)" accept=".xls,.xlsx" class="custom-file-input" id="file" name="file"
-                           required type="file">
-                </div>
-                <div [hidden]="inputForm.file" class="alert alert-danger">
-                    File is required
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="font-weight-light text-black-50" for="urlColumn">Enter url column</label>
-                <input #urlColumn="ngModel" [(ngModel)]="inputForm.urlColumn" class="form-control input-lg" id="urlColumn" name="urlColumn"
-                       required type="number">
-                <div [hidden]="urlColumn.valid || urlColumn.pristine" class="alert alert-danger">
-                    Url column number is required
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="font-weight-light text-black-50" for="insertColumn">Enter insert column</label>
-                <input #insertColumn="ngModel" [(ngModel)]="inputForm.insertColumn" class="form-control input-lg" id="insertColumn" name="insertColumn"
-                       required type="number">
-                <div [hidden]="insertColumn.valid || insertColumn.pristine" class="alert alert-danger">
-                    Insert column number is required
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-between">
-                <button mat-button (click)="checkPrice();errorMessage=null;successMessage=null" [disabled]="!inputNgForm.form.valid || !inputForm.file">
-                    Check
-                </button>
-
-                <button mat-button (click)="isStatusesView=true">
-                    Statuses
-                </button>
-            </div>
-        </form>
-    </div>
-    <app-status (unstatusEvent)="receiveStatus($event)" [isStatusesView]="isStatusesView"></app-status>
+            <button mat-button (click)="isStatusesView=true">
+                Statuses
+            </button>
+        </div>
+    </form>
 </div>
+<app-status (unstatusEvent)="receiveStatus($event)" [isStatusesView]="isStatusesView"></app-status>

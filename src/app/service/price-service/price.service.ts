@@ -15,7 +15,7 @@ export class PriceService {
     }
 
     public getFileById(id: number) {
-        return this.httpClient.get('/api/price-check/file/' + id, {responseType: 'arraybuffer'});
+        return this.httpClient.get('/api/pricecheck/file/' + id, {responseType: 'arraybuffer'});
     }
 
     public getFileStatuses() {
