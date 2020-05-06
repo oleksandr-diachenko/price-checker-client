@@ -5,6 +5,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {saveAs} from 'file-saver';
 import {PriceService} from 'app/service/price-service/price.service';
 import {MatPaginator} from '@angular/material';
+import {SnackBarService} from '../../service/snack-bar/snack-bar.service';
 
 @Component({
     selector: 'app-status',
@@ -21,7 +22,7 @@ export class StatusComponent implements OnInit {
     private stomp: Stomp;
     @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-    constructor(private priceService: PriceService) {
+    constructor(private priceService: PriceService, private snackBar: SnackBarService) {
     }
 
     private static getCurrentFileName(fileName: string) {
@@ -54,6 +55,7 @@ export class StatusComponent implements OnInit {
     }
 
     private errorCallBack() {
+        this.snackBar.openRedSnackBar('Disconnected from web socket. Reconnecting.');
         setTimeout(() => {
             this.connect();
         }, 1000);
