@@ -27,7 +27,7 @@ export class FormComponent {
     private changeFileInputLabel(): void {
         document.getElementById('fileInputLabel').innerHTML = this.inputForm.file
             ? this.inputForm.file.name
-            : 'Choose file';
+            : 'Choose file *';
     }
 
     public checkPrice(): void {
