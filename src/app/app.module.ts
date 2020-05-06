@@ -13,7 +13,14 @@ import {SuccessComponent} from './component/success/success.component';
 import {ErrorComponent} from './component/error/error.component';
 import {StatusComponent} from './component/status/status.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule, MatTableModule} from '@angular/material';
+import {
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatTableModule
+} from '@angular/material';
 import {AppRoutingModule} from './app-routing.module';
 
 
@@ -39,7 +46,8 @@ import {AppRoutingModule} from './app-routing.module';
         ReactiveFormsModule,
         BrowserAnimationsModule,
         MatFormFieldModule,
-        AppRoutingModule
+        AppRoutingModule,
+        MatPaginatorModule
     ],
     providers: [
         LoaderService,
