@@ -16,11 +16,11 @@
         <div class="d-flex justify-content-between">
             <button (click)="checkPrice()" [disabled]="!inputNgForm.form.valid || !inputForm.file || inputForm.urlColumn < 1 || inputForm.insertColumn < 1" color="primary"
                     id="check"
-                    mat-button>
+                    mat-stroked-button>
                 Check
             </button>
 
-            <button id="statuses" mat-button routerLink="/statuses" routerLinkActive="active">
+            <button id="statuses" mat-stroked-button routerLink="/statuses" routerLinkActive="active">
                 Statuses
             </button>
         </div>
