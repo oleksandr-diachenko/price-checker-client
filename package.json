@@ -24,7 +24,7 @@
     "@angular/material": "^8.2.3",
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
-    "@angular/router": "~8.2.14",
+    "@angular/router": "^8.2.14",
     "@swimlane/ngx-datatable": "^16.1.1",
     "@types/file-saver": "^2.0.1",
     "angular-bootstrap-md": "^8.10.1",

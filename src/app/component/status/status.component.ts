@@ -57,10 +57,6 @@ export class StatusComponent implements OnInit {
         }, 1000);
     }
 
-    public switchToFormView() {
-        this.unstatusEvent.emit(false);
-    }
-
     public download(fileId: number, name: string) {
         this.priceService.getFileById(fileId)
             .subscribe(data => {

@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormComponent} from './component/form/form.component';
@@ -14,13 +13,8 @@ import {SuccessComponent} from './component/success/success.component';
 import {ErrorComponent} from './component/error/error.component';
 import {StatusComponent} from './component/status/status.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatProgressSpinnerModule,
-    MatTableModule
-} from '@angular/material';
+import {MatButtonModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule, MatTableModule} from '@angular/material';
+import {AppRoutingModule} from './app-routing.module';
 
 
 @NgModule({
@@ -36,7 +30,6 @@ import {
     ],
     imports: [
         BrowserModule,
-        AppRoutingModule,
         HttpClientModule,
         FormsModule,
         MatTableModule,
@@ -45,7 +38,8 @@ import {
         MatInputModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        AppRoutingModule
     ],
     providers: [
         LoaderService,
