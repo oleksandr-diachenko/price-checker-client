@@ -1,33 +1,29 @@
-<div [hidden]="isStatusesView">
+<div>
     <form class="form" #inputNgForm="ngForm">
         <app-error [errorMessage]="errorMessage"></app-error>
         <app-success [successMessage]="successMessage"></app-success>
         <div class="custom-file">
-            <label class="custom-file-label text-black-50" for="file" id="fileInputLabel">Choose file</label>
+            <label class="custom-file-label text-black-50" for="file" id="fileInputLabel" >Choose file *</label>
             <input (change)="fileProgress($event)" accept=".xls,.xlsx" class="custom-file-input" id="file" name="file"
                    required type="file">
         </div>
-        <div [hidden]="inputForm.file" class="alert alert-danger">
-            File is required
-        </div>
         <mat-form-field>
             <input matInput type="number" [min]="1" placeholder="Url column" [(ngModel)]="inputForm.urlColumn"
-                   name="urlColumn" required>
+                   id="urlColumn" name="urlColumn" required>
         </mat-form-field>
         <mat-form-field>
             <input matInput type="number" placeholder="Insert column" [(ngModel)]="inputForm.insertColumn"
-                   name="insertColumn" required>
+                   id="insertColumn" name="insertColumn" required>
         </mat-form-field>
         <div class="d-flex justify-content-between">
-            <button mat-button (click)="checkPrice();errorMessage=null;successMessage=null"
+            <button mat-button id="check" (click)="checkPrice();errorMessage=null;successMessage=null"
                     [disabled]="!inputNgForm.form.valid || !inputForm.file || inputForm.urlColumn < 1 || inputForm.insertColumn < 1" color="primary">
                 Check
             </button>
 
-            <button mat-button (click)="isStatusesView=true">
+            <button mat-button id="statuses" routerLink="/statuses" routerLinkActive="active">
                 Statuses
             </button>
         </div>
     </form>
 </div>
-<app-status (unstatusEvent)="receiveStatus($event)" [isStatusesView]="isStatusesView"></app-status>

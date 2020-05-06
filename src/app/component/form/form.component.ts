@@ -11,10 +11,10 @@ import {LoaderService} from 'app/service/loader-service/loader.service';
 })
 export class FormComponent {
 
-    public inputForm = new InputForm(null, 1, 1);
-    public isStatusesView = false;
-    public errorMessage: string;
-    public successMessage: string;
+    inputForm = new InputForm(null, 1, 1);
+    isStatusesView = false;
+    errorMessage: string;
+    successMessage: string;
 
     constructor(private priceService: PriceService, private loaderService: LoaderService) {
     }
@@ -27,7 +27,7 @@ export class FormComponent {
     private changeFileInputLabel(): void {
         document.getElementById('fileInputLabel').innerHTML = this.inputForm.file
             ? this.inputForm.file.name
-            : 'Choose file';
+            : 'Choose file *';
     }
 
     public checkPrice(): void {
@@ -47,9 +47,5 @@ export class FormComponent {
     private handleError(error: HttpErrorResponse): void {
         this.loaderService.hide();
         this.errorMessage = error.message;
-    }
-
-    public receiveStatus($event): void {
-        this.isStatusesView = $event;
     }
 }

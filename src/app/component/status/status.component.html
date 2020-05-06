@@ -1,6 +1,6 @@
-<div [hidden]="!isStatusesView">
+<div>
 
-    <table [dataSource]="dataSource" class="mat-elevation-z8 table-striped" mat-table>
+    <table id="statuses" [dataSource]="dataSource" class="mat-elevation-z8 table-striped" mat-table>
 
         <ng-container matColumnDef="id">
             <th *matHeaderCellDef mat-header-cell> Id</th>
@@ -34,5 +34,6 @@
         <tr *matHeaderRowDef="columns" mat-header-row></tr>
         <tr *matRowDef="let row; columns: columns;" mat-row></tr>
     </table>
-    <button mat-button (click)="switchToFormView()">New check</button>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    <button mat-button routerLink="/" routerLinkActive="active">New check</button>
 </div>
