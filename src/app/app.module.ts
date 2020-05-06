@@ -9,8 +9,6 @@ import {LoaderComponent} from './component/loader/loader.component';
 import {LoaderService} from './service/loader-service/loader.service';
 import {HeaderComponent} from './component/header/header.component';
 import {FooterComponent} from './component/footer/footer.component';
-import {SuccessComponent} from './component/success/success.component';
-import {ErrorComponent} from './component/error/error.component';
 import {StatusComponent} from './component/status/status.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
@@ -19,10 +17,11 @@ import {
     MatInputModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
     MatTableModule
 } from '@angular/material';
 import {AppRoutingModule} from './app-routing.module';
-
+import {SnackBarService} from './service/snack-bar/snack-bar.service';
 
 @NgModule({
     declarations: [
@@ -31,8 +30,6 @@ import {AppRoutingModule} from './app-routing.module';
         LoaderComponent,
         HeaderComponent,
         FooterComponent,
-        SuccessComponent,
-        ErrorComponent,
         StatusComponent
     ],
     imports: [
@@ -47,11 +44,13 @@ import {AppRoutingModule} from './app-routing.module';
         BrowserAnimationsModule,
         MatFormFieldModule,
         AppRoutingModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatSnackBarModule
     ],
     providers: [
         LoaderService,
-        PriceService
+        PriceService,
+        SnackBarService
     ],
     bootstrap: [AppComponent]
 })

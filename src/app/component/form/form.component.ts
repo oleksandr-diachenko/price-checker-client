@@ -3,6 +3,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {PriceService} from 'app/service/price-service/price.service';
 import {InputForm} from 'app/model/input-form/input-form';
 import {LoaderService} from 'app/service/loader-service/loader.service';
+import {SnackBarService} from '../../service/snack-bar/snack-bar.service';
 
 @Component({
     selector: 'app-form',
@@ -12,22 +13,13 @@ import {LoaderService} from 'app/service/loader-service/loader.service';
 export class FormComponent {
 
     inputForm = new InputForm(null, 1, 1);
-    isStatusesView = false;
-    errorMessage: string;
-    successMessage: string;
 
-    constructor(private priceService: PriceService, private loaderService: LoaderService) {
+    constructor(private priceService: PriceService, private loaderService: LoaderService, private snackBar: SnackBarService) {
     }
 
     public fileProgress(fileInput: any): void {
         this.inputForm.file = fileInput.target.files[0] as File;
         this.changeFileInputLabel();
-    }
-
-    private changeFileInputLabel(): void {
-        document.getElementById('fileInputLabel').innerHTML = this.inputForm.file
-            ? this.inputForm.file.name
-            : 'Choose file *';
     }
 
     public checkPrice(): void {
@@ -39,13 +31,19 @@ export class FormComponent {
                 error => this.handleError(error));
     }
 
-     private handleResponse(): void {
+    private changeFileInputLabel(): void {
+        document.getElementById('fileInputLabel').innerHTML = this.inputForm.file
+            ? this.inputForm.file.name
+            : 'Choose file *';
+    }
+
+    private handleResponse(): void {
         this.loaderService.hide();
-        this.successMessage = 'Successfully added to queue!';
+        this.snackBar.openGreenSnackBar('Successfully added to queue!');
     }
 
     private handleError(error: HttpErrorResponse): void {
         this.loaderService.hide();
-        this.errorMessage = error.message;
+        this.snackBar.openRedSnackBar(error.message);
     }
 }
