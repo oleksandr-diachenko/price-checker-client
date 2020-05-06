@@ -12,19 +12,19 @@
         </div>
         <mat-form-field>
             <input matInput type="number" [min]="1" placeholder="Url column" [(ngModel)]="inputForm.urlColumn"
-                   name="urlColumn" required>
+                   id="urlColumn" name="urlColumn" required>
         </mat-form-field>
         <mat-form-field>
             <input matInput type="number" placeholder="Insert column" [(ngModel)]="inputForm.insertColumn"
-                   name="insertColumn" required>
+                   id="insertColumn" name="insertColumn" required>
         </mat-form-field>
         <div class="d-flex justify-content-between">
-            <button mat-button (click)="checkPrice();errorMessage=null;successMessage=null"
+            <button mat-button id="check" (click)="checkPrice();errorMessage=null;successMessage=null"
                     [disabled]="!inputNgForm.form.valid || !inputForm.file || inputForm.urlColumn < 1 || inputForm.insertColumn < 1" color="primary">
                 Check
             </button>
 
-            <button mat-button (click)="isStatusesView=true">
+            <button mat-button id="statuses" (click)="isStatusesView=true">
                 Statuses
             </button>
         </div>

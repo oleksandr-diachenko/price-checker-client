@@ -11,10 +11,10 @@ import {LoaderService} from 'app/service/loader-service/loader.service';
 })
 export class FormComponent {
 
-    private inputForm = new InputForm(null, 1, 1);
-    private isStatusesView = false;
-    private errorMessage: string;
-    private successMessage: string;
+    inputForm = new InputForm(null, 1, 1);
+    isStatusesView = false;
+    errorMessage: string;
+    successMessage: string;
 
     constructor(private priceService: PriceService, private loaderService: LoaderService) {
     }
