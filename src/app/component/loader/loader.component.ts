@@ -9,10 +9,10 @@ import {Subject} from 'rxjs';
 })
 export class LoaderComponent {
 
-    private color = 'primary';
-    private mode = 'indeterminate';
-    private value = 50;
-    private isLoading: Subject<boolean> = this.loaderService.isLoading;
+    color = 'primary';
+    mode = 'indeterminate';
+    value = 50;
+    isLoading: Subject<boolean> = this.loaderService.isLoading;
 
     constructor(private loaderService: LoaderService) {
     }
