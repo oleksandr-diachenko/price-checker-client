@@ -1,7 +1,5 @@
 <div>
-
     <table id="statuses" [dataSource]="dataSource" class="mat-elevation-z8 table-striped" mat-table>
-
         <ng-container matColumnDef="id">
             <th *matHeaderCellDef mat-header-cell> Id</th>
             <td *matCellDef="let fileStatus" mat-cell> {{fileStatus.id}} </td>
@@ -25,7 +23,7 @@
         <ng-container matColumnDef="download">
             <th *matHeaderCellDef mat-header-cell> Download</th>
             <td *matCellDef="let fileStatus" mat-cell>
-                <button mat-button (click)="download(fileStatus.fileId, fileStatus.name)"
+                <button mat-stroked-button (click)="download(fileStatus.fileId, fileStatus.name)"
                         [hidden]="fileStatus.status != 'COMPLETED'">Download
                 </button>
             </td>
@@ -35,5 +33,5 @@
         <tr *matRowDef="let row; columns: columns;" mat-row></tr>
     </table>
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-    <button mat-button routerLink="/" routerLinkActive="active">New check</button>
+    <button mat-stroked-button routerLink="/" routerLinkActive="active">New check</button>
 </div>
