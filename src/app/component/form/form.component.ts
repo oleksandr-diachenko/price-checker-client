@@ -48,8 +48,4 @@ export class FormComponent {
         this.loaderService.hide();
         this.errorMessage = error.message;
     }
-
-    public receiveStatus($event): void {
-        this.isStatusesView = $event;
-    }
 }

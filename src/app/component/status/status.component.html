@@ -1,4 +1,4 @@
-<div [hidden]="!isStatusesView">
+<div>
 
     <table id="statuses" [dataSource]="dataSource" class="mat-elevation-z8 table-striped" mat-table>
 
@@ -34,5 +34,5 @@
         <tr *matHeaderRowDef="columns" mat-header-row></tr>
         <tr *matRowDef="let row; columns: columns;" mat-row></tr>
     </table>
-    <button mat-button (click)="switchToFormView()">New check</button>
+    <button mat-button routerLink="/" routerLinkActive="active">New check</button>
 </div>

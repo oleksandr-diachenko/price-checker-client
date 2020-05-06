@@ -1,4 +1,4 @@
-<div [hidden]="isStatusesView">
+<div>
     <form class="form" #inputNgForm="ngForm">
         <app-error [errorMessage]="errorMessage"></app-error>
         <app-success [successMessage]="successMessage"></app-success>
@@ -24,10 +24,9 @@
                 Check
             </button>
 
-            <button mat-button id="statuses" (click)="isStatusesView=true">
+            <button mat-button id="statuses" routerLink="/statuses" routerLinkActive="active">
                 Statuses
             </button>
         </div>
     </form>
 </div>
-<app-status (unstatusEvent)="receiveStatus($event)" [isStatusesView]="isStatusesView"></app-status>
