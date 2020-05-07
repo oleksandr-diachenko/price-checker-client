@@ -4,8 +4,8 @@ import {saveAs} from 'file-saver';
 import {PriceService} from 'app/service/price-service/price.service';
 import {MatPaginator} from '@angular/material';
 import {SnackBarService} from '../../service/snack-bar/snack-bar.service';
-import {interval} from 'rxjs';
-import {startWith, switchMap} from 'rxjs/operators';
+import {empty, interval} from 'rxjs';
+import {catchError, startWith, switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-status',
@@ -35,9 +35,14 @@ export class StatusComponent implements OnInit {
     private subscribeToStatuses() {
         interval(5000)
             .pipe(startWith(0),
-                switchMap(() => this.priceService.getFileStatuses()))
-            .subscribe(data => this.handleFileStatusesResponse(data),
-                () => this.snackBar.openRedSnackBar('Table not updated'));
+                switchMap(() => this.priceService.getFileStatuses()
+                    .pipe(catchError(() => this.handleError()))))
+            .subscribe(data => this.handleFileStatusesResponse(data));
+    }
+
+    private handleError() {
+        this.snackBar.openRedSnackBar('Table not updated');
+        return empty();
     }
 
     private handleFileStatusesResponse(data: any): void {
