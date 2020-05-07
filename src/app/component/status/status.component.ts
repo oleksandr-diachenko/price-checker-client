@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import * as Stomp from 'stompjs';
-import * as SockJS from 'sockjs-client';
 import {MatTableDataSource} from '@angular/material/table';
 import {saveAs} from 'file-saver';
 import {PriceService} from 'app/service/price-service/price.service';
 import {MatPaginator} from '@angular/material';
 import {SnackBarService} from '../../service/snack-bar/snack-bar.service';
+import {interval} from 'rxjs';
+import {startWith, switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-status',
@@ -18,8 +18,6 @@ export class StatusComponent implements OnInit {
     dataSource = new MatTableDataSource<string>([]);
     @Input() isStatusesView: boolean;
     @Output() private unstatusEvent = new EventEmitter<boolean>();
-    private url = '/socket';
-    private stomp: Stomp;
     @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
     constructor(private priceService: PriceService, private snackBar: SnackBarService) {
@@ -30,35 +28,20 @@ export class StatusComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.connect();
-        this.priceService.getFileStatuses().subscribe(data => this.handleFileStatusesResponse(data));
+        this.subscribeToStatuses();
         this.dataSource.paginator = this.paginator;
+    }
+
+    private subscribeToStatuses() {
+        interval(5000)
+            .pipe(startWith(0),
+                switchMap(() => this.priceService.getFileStatuses()))
+            .subscribe(data => this.handleFileStatusesResponse(data),
+                () => this.snackBar.openRedSnackBar('Table not updated'));
     }
 
     private handleFileStatusesResponse(data: any): void {
         this.dataSource.data = data;
-    }
-
-    private connect() {
-        const ws = new SockJS(this.url);
-        this.stomp = Stomp.over(ws);
-        const that = this;
-        this.stomp.connect({}, () => {
-            that.stomp.subscribe('/statuses', (message) => {
-                if (message.body) {
-                    that.dataSource.data = JSON.parse(message.body);
-                }
-            });
-        }, () => {
-            that.errorCallBack();
-        });
-    }
-
-    private errorCallBack() {
-        this.snackBar.openRedSnackBar('Disconnected from web socket. Reconnecting.');
-        setTimeout(() => {
-            this.connect();
-        }, 1000);
     }
 
     public download(fileId: number, name: string) {
