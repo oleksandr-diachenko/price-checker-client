@@ -20,4 +20,8 @@ export class SnackBarService {
             panelClass: ['mat-toolbar', 'mat-warn']
         });
     }
+
+    dismiss() {
+        this.snackBar.dismiss();
+    }
 }

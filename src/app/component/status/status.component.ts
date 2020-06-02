@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {saveAs} from 'file-saver';
-import {PriceService} from 'app/service/price-service/price.service';
+import {PriceService} from 'app/service/price.service';
 import {MatPaginator} from '@angular/material';
-import {SnackBarService} from '../../service/snack-bar/snack-bar.service';
-import {empty, interval} from 'rxjs';
+import {SnackBarService} from '../../service/snack-bar.service';
+import {empty, interval, Subscription} from 'rxjs';
 import {catchError, startWith, switchMap} from 'rxjs/operators';
 
 @Component({
@@ -12,13 +12,14 @@ import {catchError, startWith, switchMap} from 'rxjs/operators';
     templateUrl: './status.component.html',
     styleUrls: ['./status.component.scss']
 })
-export class StatusComponent implements OnInit {
+export class StatusComponent implements OnInit, OnDestroy {
 
     columns = ['id', 'name', 'status', 'acceptedTime', 'download'];
     dataSource = new MatTableDataSource<string>([]);
     @Input() isStatusesView: boolean;
     @Output() private unstatusEvent = new EventEmitter<boolean>();
     @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+    subscription: Subscription;
 
     constructor(private priceService: PriceService, private snackBar: SnackBarService) {
     }
@@ -32,8 +33,13 @@ export class StatusComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
     }
 
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+        this.snackBar.dismiss();
+    }
+
     private subscribeToStatuses() {
-        interval(5000)
+        this.subscription = interval(5000)
             .pipe(startWith(0),
                 switchMap(() => this.priceService.getFileStatuses()
                     .pipe(catchError(() => this.handleError()))))

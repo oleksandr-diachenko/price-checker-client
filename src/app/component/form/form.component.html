@@ -1,28 +1,33 @@
-<div>
-    <form #inputNgForm="ngForm" class="form">
-        <div class="custom-file">
-            <label class="custom-file-label text-black-50" for="file" id="fileInputLabel">Choose file *</label>
-            <input (change)="fileProgress($event)" accept=".xls,.xlsx" class="custom-file-input" id="file" name="file"
-                   required type="file">
-        </div>
-        <mat-form-field>
-            <input [(ngModel)]="inputForm.urlColumn" [min]="1" id="urlColumn" matInput name="urlColumn"
-                   placeholder="Url column" required type="number">
-        </mat-form-field>
-        <mat-form-field>
-            <input [(ngModel)]="inputForm.insertColumn" id="insertColumn" matInput name="insertColumn"
-                   placeholder="Insert column" required type="number">
-        </mat-form-field>
-        <div class="d-flex justify-content-between">
-            <button (click)="checkPrice()" [disabled]="!inputNgForm.form.valid || !inputForm.file || inputForm.urlColumn < 1 || inputForm.insertColumn < 1" color="primary"
-                    id="check"
-                    mat-stroked-button>
-                Check
-            </button>
+<div class="row">
+    <div class="col-sm-6 offset-sm-3">
+        <form #inputNgForm="ngForm" class="form">
+            <div class="custom-file">
+                <label class="custom-file-label text-black-50" for="file" id="fileInputLabel">Choose file *</label>
+                <input (change)="fileProgress($event)" accept=".xls,.xlsx" class="custom-file-input" id="file"
+                       name="file"
+                       required type="file">
+            </div>
+            <mat-form-field>
+                <input [(ngModel)]="inputForm.urlColumn" [min]="1" id="urlColumn" matInput name="urlColumn"
+                       placeholder="Url column" required type="number">
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="inputForm.insertColumn" id="insertColumn" matInput name="insertColumn"
+                       placeholder="Insert column" required type="number">
+            </mat-form-field>
+            <div class="d-flex justify-content-between">
+                <button (click)="checkPrice()"
+                        [disabled]="!inputNgForm.form.valid || !inputForm.file || inputForm.urlColumn < 1 || inputForm.insertColumn < 1"
+                        color="primary"
+                        id="check"
+                        mat-stroked-button>
+                    Check
+                </button>
 
-            <button id="statuses" mat-stroked-button routerLink="/statuses" routerLinkActive="active">
-                Statuses
-            </button>
-        </div>
-    </form>
+                <button id="statuses" mat-stroked-button routerLink="/statuses" routerLinkActive="active">
+                    Statuses
+                </button>
+            </div>
+        </form>
+    </div>
 </div>

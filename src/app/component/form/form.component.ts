@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
-import {PriceService} from 'app/service/price-service/price.service';
-import {InputForm} from 'app/model/input-form/input-form';
-import {LoaderService} from 'app/service/loader-service/loader.service';
-import {SnackBarService} from '../../service/snack-bar/snack-bar.service';
+import {PriceService} from 'app/service/price.service';
+import {Form} from 'app/model/form';
+import {LoaderService} from 'app/service/loader.service';
+import {SnackBarService} from '../../service/snack-bar.service';
 
 @Component({
     selector: 'app-form',
@@ -12,7 +12,7 @@ import {SnackBarService} from '../../service/snack-bar/snack-bar.service';
 })
 export class FormComponent {
 
-    inputForm = new InputForm(null, 1, 1);
+    inputForm = new Form(null, 1, 1);
 
     constructor(private priceService: PriceService, private loaderService: LoaderService, private snackBar: SnackBarService) {
     }
