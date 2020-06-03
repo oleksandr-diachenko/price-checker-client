@@ -1,32 +1,38 @@
 <div class="row">
     <div class="col-sm-6 offset-sm-3">
-        <form #inputNgForm="ngForm" class="form">
-            <div class="custom-file">
-                <label class="custom-file-label text-black-50" for="file" id="fileInputLabel">Choose file *</label>
-                <input (change)="fileProgress($event)" accept=".xls,.xlsx" class="custom-file-input" id="file"
-                       name="file"
-                       required type="file">
+        <form [formGroup]="priceCheckForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="file">File</label>
+                <input type="file" formControlName="file" class="form-control" (change)="onFileChange($event)"
+                       [ngClass]="{ 'is-invalid': submitted && f.file.errors }"/>
+                <div *ngIf="submitted && f.file.errors" class="invalid-feedback">
+                    <div *ngIf="f.file.errors.required">File is required</div>
+                </div>
             </div>
-            <mat-form-field>
-                <input [(ngModel)]="inputForm.urlColumn" [min]="1" id="urlColumn" matInput name="urlColumn"
-                       placeholder="Url column" required type="number">
-            </mat-form-field>
-            <mat-form-field>
-                <input [(ngModel)]="inputForm.insertColumn" id="insertColumn" matInput name="insertColumn"
-                       placeholder="Insert column" required type="number">
-            </mat-form-field>
-            <div class="d-flex justify-content-between">
-                <button (click)="checkPrice()"
-                        [disabled]="!inputNgForm.form.valid || !inputForm.file || inputForm.urlColumn < 1 || inputForm.insertColumn < 1"
-                        color="primary"
-                        id="check"
-                        mat-stroked-button>
-                    Check
+            <div class="form-group">
+                <label for="urlColumn">Url column number</label>
+                <input type="number" [min]="1" formControlName="urlColumn" class="form-control"
+                       [ngClass]="{ 'is-invalid': submitted && f.urlColumn.errors }"/>
+                <div *ngIf="submitted && f.urlColumn.errors" class="invalid-feedback">
+                    <div *ngIf="f.urlColumn.errors.required">Url column number is required</div>
+                    <div *ngIf="f.urlColumn.errors.min">Number should be at least 1</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="insertColumn">Insert column number</label>
+                <input type="number" [min]="1" formControlName="insertColumn" class="form-control"
+                       [ngClass]="{ 'is-invalid': submitted && f.insertColumn.errors }"/>
+                <div *ngIf="submitted && f.insertColumn.errors" class="invalid-feedback">
+                    <div *ngIf="f.insertColumn.errors.required">Insert column number is required</div>
+                    <div *ngIf="f.insertColumn.errors.min">Number should be at least 1</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Check price
                 </button>
-
-                <button id="statuses" mat-stroked-button routerLink="/statuses" routerLinkActive="active">
-                    Statuses
-                </button>
+                <a routerLink="/statuses" class="btn btn-link">Statuses</a>
             </div>
         </form>
     </div>

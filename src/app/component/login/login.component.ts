@@ -44,18 +44,15 @@ export class LoginComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-
         this.alertService.clear();
-
         if (this.loginForm.invalid) {
             return;
         }
-
         this.loading = true;
         this.authenticationService.login(this.f.username.value, this.f.password.value)
             .pipe(first())
             .subscribe(
-                data => {
+                () => {
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
