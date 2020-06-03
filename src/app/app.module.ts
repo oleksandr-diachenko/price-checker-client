@@ -29,7 +29,6 @@ import {RegisterComponent} from './component/register/register.component';
 import {JwtInterceptor} from './auth/jwt.interceptor';
 import {ErrorInterceptor} from './auth/error.interceptor';
 import {AlertComponent} from './component/alert/alert.component';
-import {HomeComponent} from './component/home/home.component';
 import {NavbarModule} from 'angular-bootstrap-md';
 
 @NgModule({
@@ -43,8 +42,7 @@ import {NavbarModule} from 'angular-bootstrap-md';
         ProfileComponent,
         LoginComponent,
         RegisterComponent,
-        AlertComponent,
-        HomeComponent
+        AlertComponent
     ],
     imports: [
         BrowserModule,
