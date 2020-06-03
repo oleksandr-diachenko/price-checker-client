@@ -42,8 +42,8 @@ export class FormComponent implements OnInit {
         this.priceCheckForm = this.formBuilder.group({
             file: ['', Validators.required],
             fileSource: ['', [Validators.required]],
-            urlColumn: ['', [Validators.required, Validators.min(1)]],
-            insertColumn: ['', [Validators.required, Validators.min(1)]]
+            urlColumn: ['', [Validators.required, Validators.min(1), Validators.pattern('^[0-9]*$')]],
+            insertColumn: ['', [Validators.required, Validators.min(1), Validators.pattern('^[0-9]*$')]]
         });
     }
 
