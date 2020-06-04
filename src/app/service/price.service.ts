@@ -9,8 +9,8 @@ export class PriceService {
     constructor(private httpClient: HttpClient) {
     }
 
-    public processFile(formData: FormData, urlColumn: number, insertColumn: number) {
-        return this.httpClient.post('/api/pricecheck?urlIndex=' + urlColumn + '&insertIndex=' + insertColumn,
+    public processFile(formData: FormData, urlColumn: number, insertColumn: number, userId) {
+        return this.httpClient.post('/api/pricecheck?urlIndex=' + urlColumn + '&insertIndex=' + insertColumn + '&userId=' + userId,
             formData);
     }
 
@@ -18,7 +18,7 @@ export class PriceService {
         return this.httpClient.get('/api/pricecheck/files/' + id, {responseType: 'arraybuffer'});
     }
 
-    public getFileStatuses() {
-        return this.httpClient.get('/api/pricecheck/filestatuses/');
+    public getFileStatuses(userId: number) {
+        return this.httpClient.get('/api/pricecheck/filestatuses/' + userId);
     }
 }

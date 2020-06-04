@@ -5,13 +5,10 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormComponent} from './component/form/form.component';
 import {PriceService} from './service/price.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {LoaderComponent} from './component/loader/loader.component';
-import {LoaderService} from './service/loader.service';
 import {HeaderComponent} from './component/header/header.component';
 import {FooterComponent} from './component/footer/footer.component';
 import {StatusComponent} from './component/status/status.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ProfileComponent} from './component/profile/profile.component';
 
 import {
     MatButtonModule,
@@ -35,11 +32,9 @@ import {NavbarModule} from 'angular-bootstrap-md';
     declarations: [
         AppComponent,
         FormComponent,
-        LoaderComponent,
         HeaderComponent,
         FooterComponent,
         StatusComponent,
-        ProfileComponent,
         LoginComponent,
         RegisterComponent,
         AlertComponent
@@ -61,7 +56,6 @@ import {NavbarModule} from 'angular-bootstrap-md';
         NavbarModule
     ],
     providers: [
-        LoaderService,
         PriceService,
         SnackBarService,
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

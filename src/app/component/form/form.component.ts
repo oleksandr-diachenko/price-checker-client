@@ -4,6 +4,7 @@ import {PriceService} from 'app/service/price.service';
 import {SnackBarService} from '../../service/snack-bar.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AlertService} from '../../service/alert.service';
+import {AuthenticationService} from '../../auth/authentication.service';
 
 @Component({
     selector: 'app-form',
@@ -21,7 +22,11 @@ export class FormComponent implements OnInit {
     private snackBar: SnackBarService;
     private alertService: AlertService;
 
-    constructor(priceService: PriceService, formBuilder: FormBuilder, snackBar: SnackBarService, alertService: AlertService) {
+    private authenticationService: AuthenticationService;
+
+    constructor(priceService: PriceService, formBuilder: FormBuilder, snackBar: SnackBarService,
+                alertService: AlertService, authenticationService: AuthenticationService) {
+        this.authenticationService = authenticationService;
         this.alertService = alertService;
         this.snackBar = snackBar;
         this.formBuilder = formBuilder;
@@ -56,7 +61,8 @@ export class FormComponent implements OnInit {
         this.loading = true;
         const formData = new FormData();
         formData.append('file', this.priceCheckForm.get('fileSource').value);
-        this.priceService.processFile(formData, this.f.urlColumn.value, this.f.insertColumn.value)
+        this.priceService.processFile(formData, this.f.urlColumn.value,
+            this.f.insertColumn.value, this.authenticationService.currentUserValue.id)
             .subscribe(() => this.handleResponse(),
                 error => this.handleError(error));
     }
