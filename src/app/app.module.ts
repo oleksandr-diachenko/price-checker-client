@@ -16,7 +16,7 @@ import {
     MatInputModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule,
+    MatSnackBarModule, MatSortModule,
     MatTableModule
 } from '@angular/material';
 import {AppRoutingModule} from './app-routing.module';
@@ -53,7 +53,8 @@ import {NavbarModule} from 'angular-bootstrap-md';
         AppRoutingModule,
         MatPaginatorModule,
         MatSnackBarModule,
-        NavbarModule
+        NavbarModule,
+        MatSortModule
     ],
     providers: [
         PriceService,
