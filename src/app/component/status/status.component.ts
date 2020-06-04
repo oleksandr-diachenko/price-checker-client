@@ -7,6 +7,8 @@ import {SnackBarService} from '../../service/snack-bar.service';
 import {empty, interval, Subscription} from 'rxjs';
 import {catchError, startWith, switchMap} from 'rxjs/operators';
 import {AuthenticationService} from '../../auth/authentication.service';
+import {formatDate} from '@angular/common';
+import {FileStatus} from '../../model/fileStatus';
 
 @Component({
     selector: 'app-status',
@@ -16,7 +18,7 @@ import {AuthenticationService} from '../../auth/authentication.service';
 export class StatusComponent implements OnInit, OnDestroy {
 
     columns = ['name', 'status', 'acceptedTime', 'download'];
-    dataSource = new MatTableDataSource<string>([]);
+    dataSource = new MatTableDataSource<FileStatus>([]);
     @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
     subscription: Subscription;
 
@@ -75,5 +77,10 @@ export class StatusComponent implements OnInit, OnDestroy {
                     saveAs(file, StatusComponent.getCurrentFileName(file.name));
                 }
             });
+    }
+
+    getFormattedDateTime = (data: FileStatus): string => {
+        const result = formatDate(data.acceptedTime, 'yyyy-MM-dd HH:mm:ss', 'en-US');
+        return result === null ? '' : result;
     }
 }

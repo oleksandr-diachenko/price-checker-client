@@ -1,20 +1,11 @@
 <div>
     <table id="statuses" [dataSource]="dataSource" class="mat-elevation-z8 table-striped" mat-table>
 
-        <ng-container matColumnDef="name">
-            <th *matHeaderCellDef mat-header-cell> Name</th>
-            <td *matCellDef="let fileStatus" mat-cell> {{fileStatus.name}} </td>
-        </ng-container>
+        <mat-text-column name="name"></mat-text-column>
 
-        <ng-container matColumnDef="status">
-            <th *matHeaderCellDef mat-header-cell> Status</th>
-            <td *matCellDef="let fileStatus" mat-cell> {{fileStatus.status}} </td>
-        </ng-container>
+        <mat-text-column name="status"></mat-text-column>
 
-        <ng-container matColumnDef="acceptedTime">
-            <th *matHeaderCellDef mat-header-cell> Accepted time</th>
-            <td *matCellDef="let fileStatus" mat-cell>{{fileStatus.acceptedTime}}</td>
-        </ng-container>
+        <mat-text-column name="acceptedTime" [dataAccessor]="getFormattedDateTime"></mat-text-column>
 
         <ng-container matColumnDef="download">
             <th *matHeaderCellDef mat-header-cell> Download</th>
