@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {saveAs} from 'file-saver';
 import {PriceService} from 'app/service/price.service';
-import {MatPaginator} from '@angular/material';
+import {MatPaginator, MatSort, MatSortable} from '@angular/material';
 import {SnackBarService} from '../../service/snack-bar.service';
 import {empty, interval, Subscription} from 'rxjs';
 import {catchError, startWith, switchMap} from 'rxjs/operators';
@@ -20,6 +20,7 @@ export class StatusComponent implements OnInit, OnDestroy {
     columns = ['name', 'status', 'acceptedTime', 'download'];
     dataSource = new MatTableDataSource<FileStatus>([]);
     @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+    @ViewChild(MatSort, {static: true}) sort: MatSort;
     subscription: Subscription;
 
     private authenticationService: AuthenticationService;
@@ -39,6 +40,8 @@ export class StatusComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.subscribeToStatuses();
         this.dataSource.paginator = this.paginator;
+        this.sort.sort(({ id: 'acceptedTime', start: 'asc'}) as MatSortable);
+        this.dataSource.sort = this.sort;
     }
 
     ngOnDestroy(): void {
@@ -68,7 +71,6 @@ export class StatusComponent implements OnInit, OnDestroy {
     public download(fileId: number, name: string) {
         this.priceService.getFileById(fileId)
             .subscribe(data => {
-                console.log(data);
                 if (data.byteLength) {
                     const blob: any = new Blob([data], {type: 'application/binary'});
                     blob.lastModifiedDate = new Date();
