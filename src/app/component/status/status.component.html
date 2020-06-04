@@ -1,14 +1,23 @@
 <div>
     <table id="statuses" matSort [dataSource]="dataSource" class="mat-elevation-z8 table-striped" mat-table>
 
-        <mat-text-column name="name"></mat-text-column>
+        <ng-container matColumnDef="name">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header> Name</th>
+            <td *matCellDef="let fileStatus" mat-cell> {{fileStatus.name}} </td>
+        </ng-container>
 
-        <mat-text-column name="status"></mat-text-column>
+        <ng-container matColumnDef="status">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header> Status</th>
+            <td *matCellDef="let fileStatus" mat-cell> {{fileStatus.status}} </td>
+        </ng-container>
 
-        <mat-text-column name="acceptedTime" [dataAccessor]="getFormattedDateTime"></mat-text-column>
+        <ng-container matColumnDef="acceptedTime">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header> Accepted time</th>
+            <td *matCellDef="let fileStatus" mat-cell>{{getFormattedDateTime(fileStatus)}}</td>
+        </ng-container>
 
         <ng-container matColumnDef="download">
-            <th *matHeaderCellDef mat-header-cell> Download</th>
+            <th *matHeaderCellDef mat-header-cell mat-sort-header> Download</th>
             <td *matCellDef="let fileStatus" mat-cell>
                 <button mat-stroked-button (click)="download(fileStatus.fileId, fileStatus.name)"
                         [hidden]="fileStatus.status != 'COMPLETED'">Download
