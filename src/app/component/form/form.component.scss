@@ -1,4 +1,24 @@
-.form {
+#fileInputLabel {
+  border-radius: 4px;
+  height: 40px;
+  cursor: pointer;
   display: flex;
-  flex-direction: column;
+  transition: all 0.18s ease-in-out;
+  border: 1px solid #bcc5bd;
+  color: black;
+  align-items: center;
+}
+
+#fileInputLabel:hover {
+  color: #999696;
+  background-position: bottom left;
+}
+
+#file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }
