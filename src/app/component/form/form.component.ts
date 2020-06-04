@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
 import {PriceService} from 'app/service/price.service';
 import {SnackBarService} from '../../service/snack-bar.service';
@@ -11,17 +11,16 @@ import {AuthenticationService} from '../../auth/authentication.service';
     templateUrl: './form.component.html',
     styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements OnInit {
-
+export class FormComponent implements OnInit, OnDestroy {
     priceCheckForm: FormGroup;
+
     loading = false;
     submitted = false;
-
     private priceService: PriceService;
+
     private formBuilder: FormBuilder;
     private snackBar: SnackBarService;
     private alertService: AlertService;
-
     private authenticationService: AuthenticationService;
 
     constructor(priceService: PriceService, formBuilder: FormBuilder, snackBar: SnackBarService,
@@ -87,5 +86,9 @@ export class FormComponent implements OnInit {
         document.getElementById('fileInputLabel').innerHTML = fileName
             ? space + fileName
             : space + 'Choose file';
+    }
+
+    ngOnDestroy(): void {
+        this.snackBar.dismiss();
     }
 }
