@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {FileStatus} from '../model/fileStatus';
 
 @Injectable({
     providedIn: 'root'
@@ -19,6 +20,6 @@ export class PriceService {
     }
 
     public getFileStatuses(userId: number) {
-        return this.httpClient.get('/api/pricecheck/filestatuses/' + userId);
+        return this.httpClient.get<FileStatus[]>('/api/pricecheck/filestatuses/' + userId);
     }
 }
