@@ -15,7 +15,7 @@ import {AuthenticationService} from '../../auth/authentication.service';
 })
 export class StatusComponent implements OnInit, OnDestroy {
 
-    columns = ['id', 'name', 'status', 'acceptedTime', 'download'];
+    columns = ['name', 'status', 'acceptedTime', 'download'];
     dataSource = new MatTableDataSource<string>([]);
     @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
     subscription: Subscription;

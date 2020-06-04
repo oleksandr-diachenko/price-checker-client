@@ -1,9 +1,5 @@
 <div>
     <table id="statuses" [dataSource]="dataSource" class="mat-elevation-z8 table-striped" mat-table>
-        <ng-container matColumnDef="id">
-            <th *matHeaderCellDef mat-header-cell> Id</th>
-            <td *matCellDef="let fileStatus" mat-cell> {{fileStatus.id}} </td>
-        </ng-container>
 
         <ng-container matColumnDef="name">
             <th *matHeaderCellDef mat-header-cell> Name</th>
