@@ -1,6 +1,6 @@
-<app-header></app-header>
-<div class="container">
+<app-header [currentUser]="currentUser"></app-header>
+<div class="container-fluid mt-5 min-vh-100">
+    <app-alert></app-alert>
     <router-outlet></router-outlet>
 </div>
-<app-loader></app-loader>
 <app-footer></app-footer>

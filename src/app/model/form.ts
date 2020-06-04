@@ -1,4 +1,4 @@
-export class InputForm {
+export class Form {
 
     public file: File;
     public urlColumn: number;
