@@ -2,8 +2,8 @@
     <div class="col-sm-6 offset-sm-3">
         <form [formGroup]="priceCheckForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
-                <label for="file">File</label>
-                <input type="file" formControlName="file" class="form-control" (change)="onFileChange($event)"
+                <label id="fileInputLabel" for="file">&nbsp;&nbsp;&nbsp;Choose file</label>
+                <input id="file" type="file" accept=".xls, .xlsx" formControlName="file" class="form-control" (change)="onFileChange($event)"
                        [ngClass]="{ 'is-invalid': (submitted || f.file.touched) && f.file.errors }"/>
                 <div *ngIf="(submitted || f.file.touched) && f.file.errors" class="invalid-feedback">
                     <div *ngIf="f.file.errors.required">File is required</div>
@@ -11,7 +11,7 @@
             </div>
             <div class="form-group">
                 <label for="urlColumn">Url column number</label>
-                <input type="number" [min]="1" formControlName="urlColumn" class="form-control"
+                <input id="urlColumn" type="number" [min]="1" formControlName="urlColumn" class="form-control"
                        [ngClass]="{ 'is-invalid': (submitted || f.urlColumn.touched) && f.urlColumn.errors }"/>
                 <div *ngIf="(submitted || f.urlColumn.touched) && f.urlColumn.errors" class="invalid-feedback">
                     <div *ngIf="f.urlColumn.errors.required">Url column number is required</div>
@@ -21,7 +21,7 @@
             </div>
             <div class="form-group">
                 <label for="insertColumn">Insert column number</label>
-                <input type="number" [min]="1" formControlName="insertColumn" class="form-control"
+                <input id="insertColumn" type="number" [min]="1" formControlName="insertColumn" class="form-control"
                        [ngClass]="{ 'is-invalid': (submitted || f.insertColumn.touched) && f.insertColumn.errors }"/>
                 <div *ngIf="(submitted || f.insertColumn.touched) && f.insertColumn.errors" class="invalid-feedback">
                     <div *ngIf="f.insertColumn.errors.required">Insert column number is required</div>
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <button [disabled]="loading" class="btn btn-primary">
+                <button id="check" [disabled]="loading" class="btn btn-primary">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     Check price
                 </button>

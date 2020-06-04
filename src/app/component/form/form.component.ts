@@ -78,5 +78,14 @@ export class FormComponent implements OnInit {
                 fileSource: file
             });
         }
+        this.changeFileInputLabel();
+    }
+
+    private changeFileInputLabel(): void {
+        const space = '&nbsp;&nbsp;&nbsp;';
+        const fileName = this.f.file.value;
+        document.getElementById('fileInputLabel').innerHTML = fileName
+            ? space + fileName
+            : space + 'Choose file';
     }
 }
