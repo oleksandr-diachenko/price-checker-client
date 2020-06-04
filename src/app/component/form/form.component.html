@@ -11,7 +11,7 @@
             </div>
             <div class="form-group">
                 <label for="urlColumn">Url column number</label>
-                <input id="urlColumn" type="number" [min]="1" formControlName="urlColumn" class="form-control"
+                <input id="urlColumn" [value]="1" type="number" [min]="1" formControlName="urlColumn" class="form-control"
                        [ngClass]="{ 'is-invalid': (submitted || f.urlColumn.touched) && f.urlColumn.errors }"/>
                 <div *ngIf="(submitted || f.urlColumn.touched) && f.urlColumn.errors" class="invalid-feedback">
                     <div *ngIf="f.urlColumn.errors.required">Url column number is required</div>
@@ -21,7 +21,7 @@
             </div>
             <div class="form-group">
                 <label for="insertColumn">Insert column number</label>
-                <input id="insertColumn" type="number" [min]="1" formControlName="insertColumn" class="form-control"
+                <input id="insertColumn" [value]="1" type="number" [min]="1" formControlName="insertColumn" class="form-control"
                        [ngClass]="{ 'is-invalid': (submitted || f.insertColumn.touched) && f.insertColumn.errors }"/>
                 <div *ngIf="(submitted || f.insertColumn.touched) && f.insertColumn.errors" class="invalid-feedback">
                     <div *ngIf="f.insertColumn.errors.required">Insert column number is required</div>
