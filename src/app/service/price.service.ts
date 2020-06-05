@@ -20,6 +20,6 @@ export class PriceService {
     }
 
     public getFileStatuses(userId: number) {
-        return this.httpClient.get<FileStatus[]>('/api/pricecheck/filestatuses/user/' + userId);
+        return this.httpClient.get<FileStatus[]>('/api/pricecheck/filestatuses/users/' + userId);
     }
 }
