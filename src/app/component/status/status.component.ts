@@ -65,7 +65,7 @@ export class StatusComponent implements OnInit, OnDestroy {
 
     private handleFileStatusesResponse(data: any): void {
         this.snackBar.dismiss();
-        this.dataSource.data = data;
+        this.dataSource.data = data._embedded.fileStatusList;
     }
 
     public download(fileId: number, name: string) {
