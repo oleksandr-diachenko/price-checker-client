@@ -3,7 +3,7 @@
         <form [formGroup]="priceCheckForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <label id="fileInputLabel" for="file">&nbsp;&nbsp;&nbsp;Choose file</label>
-                <input id="file" type="file" accept=".xls, .xlsx" formControlName="file" class="form-control" (change)="onFileChange($event)"
+                <input id="file" type="file" accept=".xls,.xlsx" formControlName="file" class="form-control" (change)="onFileChange($event)"
                        [ngClass]="{ 'is-invalid': (submitted || f.file.touched) && f.file.errors }"/>
                 <div *ngIf="(submitted || f.file.touched) && f.file.errors" class="invalid-feedback">
                     <div *ngIf="f.file.errors.required">File is required</div>
@@ -34,7 +34,7 @@
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     Check price
                 </button>
-                <a routerLink="/statuses" class="btn btn-link">Statuses</a>
+                <a routerLink="/statuses" id="statuses" class="btn btn-link">Statuses</a>
             </div>
         </form>
     </div>
